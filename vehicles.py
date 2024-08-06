@@ -21,7 +21,7 @@ class Vehicle:
 
     def __repr__(self):
         return(f"Vehicle(name={self.name}, model={self.model}, vehicle_class={self.vehicle_class}, "
-               f"manufacturer={self.manufacturer}, cost_in_credits={cost_in_credits}, lenght={self.lenght}, " 
+               f"manufacturer={self.manufacturer}, cost_in_credits={self.cost_in_credits}, lenght={self.lenght}, " 
                f"crew={self.crew}, passengers={self.passengers}, max_atmosphering_speed={self.max_atmosphering_speed}, "
                f"cargo_capacity={self.cargo_capacity}, consumables={self.consumables}, films={self.films}, "
                f"pilots={self.pilots}, url={self.url}, created={self.created}, edited={self.edited})")
