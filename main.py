@@ -42,3 +42,21 @@ def load_films_from_api():
         vehicles = load_entity_names(film_data['properties']['vehicles'])
         species = load_entity_names(film_data['properties']['species'])
         planets = load_entity_names(film_data['properties']['planets'])
+        
+        film = Film(
+            title=film_data['properties']['title'],
+            episode_id=film_data['properties']['episode_id'],
+            opening_crawl=film_data['properties']['opening_crawl'],
+            director=film_data['properties']['director'],
+            producer=film_data['properties']['producer'],
+            release_date=film_data['properties']['release_date'],
+            species=species,
+            starships=starships,
+            vehicles=vehicles,
+            characters=characters,
+            planets=planets,
+            url=film_data['properties']['url'],
+            created=film_data['properties']['created'],
+            edited=film_data['properties']['edited']
+        )
+        Film.film_list.append(film)
