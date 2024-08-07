@@ -69,3 +69,11 @@ def load_character_from_api():
             # Cargar las URLs para cada personaje para obtener más detalles
             character_detail_response = requests.get(character_data['url'])
             character_detail = character_detail_response.json()['result']['properties']
+            
+            # Obtener el nombre del homeworld del personaje
+            if character_detail['homeworld']:
+                homeworld_response = requests.get(character_detail['homeworld'])
+                homeworld_data = homeworld_response.json()['result']['properties']
+                homeworld_name = homeworld_data['name']
+            else:
+                homeworld_name = "Unknown"  # Si no hay URL del homeworld, asignar un valor por defecto
