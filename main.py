@@ -9,4 +9,9 @@ from starship import Starship
 from stats import *
 from missions import *
 
-
+def load_homeworld_name(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        return data['result']['properties']['name']
+    return "Unknown"
