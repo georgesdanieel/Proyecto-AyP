@@ -22,3 +22,12 @@ def load_entity_names(urls):
         data = response.json()
         names.append(data['result']['properties']['name'])
     return names
+def convert_to_number(value, dtype=float):
+    """ Intenta convertir un valor a un tipo numérico dado, maneja excepciones y valores especiales. """
+    if value.lower() == 'unknown':
+        return None
+    try:
+        value = value.replace(',', '')
+        return dtype(value)
+    except ValueError:
+        return None
