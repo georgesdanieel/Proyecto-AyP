@@ -60,3 +60,12 @@ def load_films_from_api():
             edited=film_data['properties']['edited']
         )
         Film.film_list.append(film)
+def load_character_from_api():
+    api_url = "https://www.swapi.tech/api/people"
+    while api_url:  # Loop para manejar la paginación
+        response = requests.get(api_url)
+        data = response.json()
+        for character_data in data['results']:  # Uso de la clave correcta 'results'
+            # Cargar las URLs para cada personaje para obtener más detalles
+            character_detail_response = requests.get(character_data['url'])
+            character_detail = character_detail_response.json()['result']['properties']
