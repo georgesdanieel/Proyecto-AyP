@@ -15,3 +15,10 @@ def load_homeworld_name(url):
         data = response.json()
         return data['result']['properties']['name']
     return "Unknown"
+def load_entity_names(urls):
+    names = []
+    for url in urls:
+        response = requests.get(url)
+        data = response.json()
+        names.append(data['result']['properties']['name'])
+    return names
