@@ -77,3 +77,20 @@ def load_character_from_api():
                 homeworld_name = homeworld_data['name']
             else:
                 homeworld_name = "Unknown"  # Si no hay URL del homeworld, asignar un valor por defecto
+                
+            # Crear instancia de Character con los datos disponibles, incluyendo el nombre del homeworld
+            character = Character(
+                name=character_detail['name'],
+                birth_year=character_detail['birth_year'],
+                eye_color=character_detail['eye_color'],
+                gender=character_detail['gender'],
+                hair_color=character_detail['hair_color'],
+                height=character_detail['height'],
+                mass=character_detail['mass'],
+                skin_color=character_detail['skin_color'],
+                homeworld=homeworld_name,  # Usar el nombre del homeworld
+                url=character_detail['url'],
+                created=character_detail['created'],
+                edited=character_detail['edited']
+            )
+            Character.character_list.append(character)
