@@ -31,3 +31,14 @@ def convert_to_number(value, dtype=float):
         return dtype(value)
     except ValueError:
         return None
+def load_films_from_api():
+    api_url = "https://www.swapi.tech/api/films"
+    response = requests.get(api_url)
+    data = response.json()
+    for film_data in data['result']:
+        # Cargar los nombres de las entidades relacionadas
+        characters = load_entity_names(film_data['properties']['characters'])
+        starships = load_entity_names(film_data['properties']['starships'])
+        vehicles = load_entity_names(film_data['properties']['vehicles'])
+        species = load_entity_names(film_data['properties']['species'])
+        planets = load_entity_names(film_data['properties']['planets'])
