@@ -202,3 +202,7 @@ def load_species_from_api():
         for species_data in data['results']:
             species_detail_response = requests.get(species_data['url'])
             species_detail = species_detail_response.json()['result']['properties']
+
+            # Usar una función auxiliar para cargar los nombres desde los URLs de personas
+            people_names = load_entity_names(species_detail['people']) if species_detail['people'] else []
+            homeworld_name = load_homeworld_name(species_detail['homeworld']) if species_detail['homeworld'] else "Unknown"
