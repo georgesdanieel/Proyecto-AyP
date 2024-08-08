@@ -122,3 +122,14 @@ def load_planets_from_api():
                 edited=planet_detail['edited']
             )
             Planet.planet_list.append(planet)
+
+        api_url = data['next']  # Actualizar el URL para la siguiente página
+def load_vehicles_from_api():
+    api_url = "https://www.swapi.tech/api/vehicles"
+    while api_url:  # Loop para manejar la paginación
+        response = requests.get(api_url)
+        data = response.json()
+        for vehicle_data in data['results']:  # Usamos la clave 'results' para iterar
+            # Cargar las URLs para cada vehículo para obtener más detalles
+            vehicle_detail_response = requests.get(vehicle_data['url'])
+            vehicle_detail = vehicle_detail_response.json()['result']['properties']
