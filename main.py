@@ -138,7 +138,7 @@ def load_vehicles_from_api():
             films_names = load_entity_names(vehicle_detail['films']) if 'films' in vehicle_detail else []
             pilots_names = load_entity_names(vehicle_detail['pilots']) if 'pilots' in vehicle_detail else []
 
-            
+
             # Crear instancia de Vehicle con los datos disponibles
             vehicle = Vehicle(
                 name=vehicle_detail['name'],
@@ -159,3 +159,14 @@ def load_vehicles_from_api():
                 edited=vehicle_detail['edited']
             )
             Vehicle.vehicle_list.append(vehicle)
+
+        api_url = data['next']  # Actualizar el URL para la siguiente página
+def load_starships_from_api():
+
+    api_url = "https://www.swapi.tech/api/starships"
+    while api_url:
+        response = requests.get(api_url)
+        data = response.json()
+        for starship_data in data['results']:
+            starship_detail_response = requests.get(starship_data['url'])
+            starship_detail = starship_detail_response.json()['result']['properties']
