@@ -133,3 +133,7 @@ def load_vehicles_from_api():
             # Cargar las URLs para cada vehículo para obtener más detalles
             vehicle_detail_response = requests.get(vehicle_data['url'])
             vehicle_detail = vehicle_detail_response.json()['result']['properties']
+            
+            # Cargar los nombres de films y pilotos si existen
+            films_names = load_entity_names(vehicle_detail['films']) if 'films' in vehicle_detail else []
+            pilots_names = load_entity_names(vehicle_detail['pilots']) if 'pilots' in vehicle_detail else []
