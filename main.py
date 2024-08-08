@@ -77,7 +77,7 @@ def load_character_from_api():
                 homeworld_name = homeworld_data['name']
             else:
                 homeworld_name = "Unknown"  # Si no hay URL del homeworld, asignar un valor por defecto
-                
+
             # Crear instancia de Character con los datos disponibles, incluyendo el nombre del homeworld
             character = Character(
                 name=character_detail['name'],
@@ -94,3 +94,15 @@ def load_character_from_api():
                 edited=character_detail['edited']
             )
             Character.character_list.append(character)
+
+        api_url = data.get('next', None)  # Actualizar el URL para la siguiente página
+def load_planets_from_api():
+    api_url = "https://www.swapi.tech/api/planets"
+    while api_url:  # Loop para manejar la paginación
+        response = requests.get(api_url)
+        data = response.json()
+        for planet_data in data['results']:  # Usamos la clave 'results' para iterar
+            # Cargar las URLs para cada planeta para obtener más detalles
+            planet_detail_response = requests.get(planet_data['url'])
+            planet_detail = planet_detail_response.json()['result']['properties']
+
