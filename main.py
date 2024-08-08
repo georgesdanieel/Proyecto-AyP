@@ -106,3 +106,19 @@ def load_planets_from_api():
             planet_detail_response = requests.get(planet_data['url'])
             planet_detail = planet_detail_response.json()['result']['properties']
 
+            # Crear instancia de Planet con los datos disponibles
+            planet = Planet(
+                name=planet_detail['name'],
+                diameter=planet_detail['diameter'],
+                rotation_period=planet_detail['rotation_period'],
+                orbital_period=planet_detail['orbital_period'],
+                gravity=planet_detail['gravity'],
+                population=planet_detail['population'],
+                climate=planet_detail['climate'],
+                terrain=planet_detail['terrain'],
+                surface_water=planet_detail['surface_water'],
+                url=planet_detail['url'],
+                created=planet_detail['created'],
+                edited=planet_detail['edited']
+            )
+            Planet.planet_list.append(planet)
