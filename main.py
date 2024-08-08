@@ -170,3 +170,25 @@ def load_starships_from_api():
         for starship_data in data['results']:
             starship_detail_response = requests.get(starship_data['url'])
             starship_detail = starship_detail_response.json()['result']['properties']
+
+            # Utilizar la función auxiliar para convertir y manejar valores
+            starship = Starship(
+                name=starship_detail['name'],
+                model=starship_detail['model'],
+                starship_class=starship_detail['starship_class'],
+                manufacturer=starship_detail['manufacturer'],
+                cost_in_credits=convert_to_number(starship_detail['cost_in_credits'], int),
+                length=convert_to_number(starship_detail['length'], int),
+                crew=starship_detail['crew'],
+                passengers=convert_to_number(starship_detail['passengers'], int),
+                max_atmosphering_speed=convert_to_number(starship_detail['max_atmosphering_speed'], int),
+                hyperdrive_rating=convert_to_number(starship_detail['hyperdrive_rating'], float),
+                MGLT=convert_to_number(starship_detail['MGLT'], int),
+                cargo_capacity=convert_to_number(starship_detail['cargo_capacity'], int),
+                consumables=starship_detail['consumables'],
+                pilots=load_entity_names(starship_detail['pilots']),
+                url=starship_detail['url'],
+                created=starship_detail['created'],
+                edited=starship_detail['edited']
+            )
+            Starship.starship_list.append(starship)
