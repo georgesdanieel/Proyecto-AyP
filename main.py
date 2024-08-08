@@ -137,3 +137,25 @@ def load_vehicles_from_api():
             # Cargar los nombres de films y pilotos si existen
             films_names = load_entity_names(vehicle_detail['films']) if 'films' in vehicle_detail else []
             pilots_names = load_entity_names(vehicle_detail['pilots']) if 'pilots' in vehicle_detail else []
+
+            
+            # Crear instancia de Vehicle con los datos disponibles
+            vehicle = Vehicle(
+                name=vehicle_detail['name'],
+                model=vehicle_detail['model'],
+                vehicle_class=vehicle_detail['vehicle_class'],
+                manufacturer=vehicle_detail['manufacturer'],
+                cost_in_credits=vehicle_detail['cost_in_credits'],
+                length=vehicle_detail['length'],
+                crew=vehicle_detail['crew'],
+                passengers=vehicle_detail['passengers'],
+                max_atmosphering_speed=vehicle_detail['max_atmosphering_speed'],
+                cargo_capacity=vehicle_detail['cargo_capacity'],
+                consumables=vehicle_detail['consumables'],
+                films=films_names,  # Usamos los nombres cargados
+                pilots=pilots_names,  # Usamos los nombres cargados
+                url=vehicle_detail['url'],
+                created=vehicle_detail['created'],
+                edited=vehicle_detail['edited']
+            )
+            Vehicle.vehicle_list.append(vehicle)
