@@ -192,3 +192,13 @@ def load_starships_from_api():
                 edited=starship_detail['edited']
             )
             Starship.starship_list.append(starship)
+
+        api_url = data.get('next')  # Actualizar el URL para la siguiente página
+def load_species_from_api():
+    api_url = "https://www.swapi.tech/api/species"
+    while api_url:
+        response = requests.get(api_url)
+        data = response.json()
+        for species_data in data['results']:
+            species_detail_response = requests.get(species_data['url'])
+            species_detail = species_detail_response.json()['result']['properties']
