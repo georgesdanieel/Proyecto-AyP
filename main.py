@@ -206,3 +206,53 @@ def load_species_from_api():
             # Usar una función auxiliar para cargar los nombres desde los URLs de personas
             people_names = load_entity_names(species_detail['people']) if species_detail['people'] else []
             homeworld_name = load_homeworld_name(species_detail['homeworld']) if species_detail['homeworld'] else "Unknown"
+
+            species=Species(
+                name=species_detail['name'], classification=species_detail['classification'], designation=species_detail['designation'],
+                average_height=species_detail['average_height'], average_lifespan=species_detail['average_life'], hair_colors=species_detail['hair_color'], 
+                skin_colors=species_detail['skin_color'], eye_colors=species_detail['name'], language=species_detail['language'], 
+                homeworld=species_detail['homeworld'], people=species_detail['people'], url=species_detail['url'], created=species_detail['created'], 
+                edited=species_detail['edited']
+            )
+            Species.species_list.append(species)
+        
+        api_url=data.get('next')
+def view_movies():
+    print("\nLista de películas:")
+    for film in Film.film_list:
+        print(f"Título: {film.title}, Episode: {film.episode_id}, Fecha de lanzamiento: {film.release_date}, Opening crawl: {film.opening_crawl},
+Director: {film.director}")
+
+def view_species():
+    print("\nLista de especies:")
+    for species in Species.species_list:
+        print(f"Título: {species.name}, Altura: {species.average_height}, Clasificación: {species.classification}, Planeta de origen: {species.homeworld},
+Lengua Materna: {species.language}")
+        
+def view_planets():
+    print("\nLista de planetas:")
+    for planet in Planet.planet_list:
+        print(f"Nombre: {planet.title}, Período de órbita: {planet.orbital_period}, Período de rotación: {planet.rotation_period}, Población: {planet.population},
+Clima: {planet.climate}")
+
+def search_characters():
+    search_query=input("Introduzca parte del nombre del personaje para buscar:  ")
+    print("\nResultados de la búsqueda: ")
+    for character in Character.character_list:
+        if search_query.lower() in character.namemlowe():
+            print(f"Nombre: {character.name}, Planeta de origen: {character.homeworld}, Género: {character.gender}")
+
+def submenu():
+    while True:
+        print("\nSeleccione una opción del submenú:")
+        print("1. Película de la saga")
+        print("2. Especies de seres vivos")
+        print("3. Planetas")
+        print("4. Personajes")
+        print("5. Regresar al menú principal")
+        
+
+
+        
+         
+         
