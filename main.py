@@ -250,7 +250,51 @@ def submenu():
         print("3. Planetas")
         print("4. Personajes")
         print("5. Regresar al menú principal")
-        
+
+        sub_selec=input(">>> ")
+        if sub_selec=="1":
+            view_movies()
+        elif sub_selec=="2":
+            view_species()
+        elif sub_selec=="3":
+            view_planets()
+        elif sub_selec=="4":
+            search_characters()
+        elif sub_selec=="5":
+            print("Regresando al menú principal")
+            break
+        else: 
+            print("Opción no válida. Por favor, intente de nuevo.")
+
+def statistics_submenu():
+    while True: 
+        print("nSeleccione una opción del submenú de estadísticas:")
+        print("1. Gráfico de cantidad de personajes nacidos en cada planeta")
+        print("2. Gráficos de características de naves")
+        print("3. Estadísticas sobre naves")
+        print("4. Regresar al menú principal")
+
+        sub_selec=input(">>> ")
+        if sub_selec=="1":
+            print("Mostrando gráfico de cantidad de personajes por planeta")
+            plot_characters_per_planet(Character.character_list)
+        elif sub_selec=="2":
+            print("Mostrando gráficos de características de naves")
+            plot_starship_characteristics(Starship.starship_list)
+        elif sub_selec=="3":
+            print("Mostrando estadísticas sobre naves")
+            calculate_starship_statistics(Starship.starship_list)
+        elif sub_selec=="4":
+            print("Regresando al menú principal")
+            break
+        else: 
+            print("Opción no válida. Por favor, intente de nuevo")
+
+
+
+
+            
+
 
 
         
