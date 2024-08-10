@@ -291,9 +291,85 @@ def statistics_submenu():
             print("Opción no válida. Por favor, intente de nuevo")
 
 
+def missions_submenu():
+    while True:
+        print("\nSeleccione una opción del submenú de misiones:")
+        print("1. Misiones de la saga")
+        print("2. Modificar misión")
+        print("3. Visualizar misión")
+        print("4. Guardar misiones")
+        print("5. Cargar misiones")
+        print("6. Regresar al menú principal")
+
+        sub_selec=input(">>> ")
+
+        if sub_selec=="1":
+            print("Contruir misión")
+            construir_musion()
+        elif sub_selec=="2":
+            print("Modificar misión")
+            modificar_mision()
+        elif sub_selec=="3":
+            print("Visualizar misión")
+            visualizar_mision()
+        elif sub_selec=="4":
+            print("Guardar misiones")
+            guardar_misiones()
+        elif sub_selec=="5":
+            print("Cargar misiones")
+            cargar_misiones()
+        elif sub_selec=="6":
+            print("Regresando al menú principal")
+            break
+        else:
+            print("Opción no válida. Por favor, intente de nuevo")
+
+def main():
+    while True:
+        print("\nBienvenido a Star Wars Wikis!")
+        print("Selecciones que desea realizar:")
+        print("1. Ver listado detallados")
+        print("2. Ver estadísticas")
+        print("3. Ver misiones")
+        print("4. Salir")
+
+        selec=input(">>> ")
+
+        if selec=="1":
+            submenu()
+        elif selec== "2":
+            statistics_submenu()
+        elif selec=="3":
+            missions_submenu()
+        elif selec=="4":
+            print("Gracias por usar Star Wars Wikis. Hasta pronto!")
+            break
+        else:
+            print("Opción no válida. Por favor, intente de nuevo")
+
+#prin('loading data from swapi...')
+#load_films_from_api()
+#print("films loaded...")
+#load_character_from_api()
+#print("characters loaded...")
+#load_planets_from_api()
+#print("planets loaded...")
+#load_starships_from_api()
+#print("starships loaded...")
+#load_species_from_api()
+#print("species loaded...")
+#print('Finished loading all apis, starting application...)
+#save_data_to_files()
+#print("data saved succesfully in txt files")
+
+load_data_from_files()
+print('data succesfully loaded from files')
+main()
 
 
-            
+
+
+
 
 
 
