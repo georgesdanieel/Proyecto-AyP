@@ -273,15 +273,59 @@ def load_planets_from_csv():
             Planet.planet_list.append(planet)
 
             species=Species(
-                name=species_detail['name'], classification=species_detail['classification'], designation=species_detail['designation'],
-                average_height=species_detail['average_height'], average_lifespan=species_detail['average_life'], hair_colors=species_detail['hair_color'], 
-                skin_colors=species_detail['skin_color'], eye_colors=species_detail['name'], language=species_detail['language'], 
-                homeworld=species_detail['homeworld'], people=species_detail['people'], url=species_detail['url'], created=species_detail['created'], 
+                name=species_detail['name'], 
+                classification=species_detail['classification'], 
+                designation=species_detail['designation'],
+                average_height=species_detail['average_height'], 
+                average_lifespan=species_detail['average_life'], 
+                hair_colors=species_detail['hair_color'], 
+                skin_colors=species_detail['skin_color'], 
+                eye_colors=species_detail['name'], 
+                language=species_detail['language'], 
+                homeworld=species_detail['homeworld'], 
+                people=species_detail['people'], 
+                url=species_detail['url'], 
+                created=species_detail['created'], 
                 edited=species_detail['edited']
             )
             Species.species_list.append(species)
         
         api_url=data.get('next')
+
+
+
+
+    print('Planets successfully loaded from CSV')
+def load_starships_from_csv():
+    Starship.starship_list=[]
+    csv_path= os.path.join(os.path.diname(__file__), 'csv', 'starships.csv')
+    with open(csv_path, mode='r', encoding='utf-8') as file:
+        csv_reader=csv.DictReader(file)
+        for row in csv_reader:
+            starship=Starship(
+                name=row['name'],
+                model=row['model']
+                manufacturer=row['manufacturer']
+                cost_in_credits=row['cost_in_credits']
+                lenght=row['lenght']
+                max_atmosphering_speed=row['max_atmosphering_speed']
+                crew=row['crew']
+                passengers=row['passengers']
+                cargo_capacity=row['cargo_capacity']
+                consumables=row['consumables']
+                hyperdrive_rating=row['hyperdrive_rating']
+                MGLT=row['MGLT']
+                starship_class=row['starship_class']
+                pilots=row['pilots']
+                films=row['films']
+                url=row['url']
+                created=row['created']
+                edited=row['edited']
+            )
+            Starship.starship_list.append(starship)
+    print('Starship succesfully loaded from CSV')
+
+###Lists     
 def view_movies():
     print("\nLista de películas:")
     for film in Film.film_list:
@@ -291,22 +335,89 @@ Director: {film.director}")
 def view_species():
     print("\nLista de especies:")
     for species in Species.species_list:
-        print(f"Título: {species.name}, Altura: {species.average_height}, Clasificación: {species.classification}, Planeta de origen: {species.homeworld},
-Lengua Materna: {species.language}")
-        
+        print("\n\nNombre: {species.name}")
+        print(f"Altura: {species.average_height}")
+        print(f"Clasificación: {species.classification}")
+
+        homeworld_name="Desconocido"
+        for planet in Planet.pplanet_list:
+            if planet.url==species.homeworld:
+                homeworld_name=planet.name
+                break
+        print(f"Origen: {homeworld_name}")
+        print(f"Lengua materna: {species.language}")
+
+        character_names=[]
+        for person in Character.character_list:
+            if person.url in species.people:
+                character_names.append(person.name)
+        print(f"Personajes: {', '.join(character_names) if character_names else 'Ninguno'}")
+    
+        films=[]
+        for film in Film.film_list:
+            if species.url in film.species:
+                films.append(f"{film.title}")
+        print(f"Películas: {', '.join(film) if film else 'Ninguno'}")
+
 def view_planets():
     print("\nLista de planetas:")
     for planet in Planet.planet_list:
-        print(f"Nombre: {planet.title}, Período de órbita: {planet.orbital_period}, Período de rotación: {planet.rotation_period}, Población: {planet.population},
-Clima: {planet.climate}")
+        print(f"\n\Nombre: {planet.title}")
+        print(f"Período de órbita: {planet.orbital_period}") 
+        print(f"Período de rotación: {planet.rotation_period}") 
+        print(f"Población: {planet.population}")
+        print(f"Clima: {planet.climate}")
+
+        people_names=[]
+        for person in Character.character_list:
+            if person.homeworld==planet.url:
+                people_names.append(person.name)
+        print(f"Personajes: {', '.join(people_names) if people_names else 'Ninguno'}")
+
+        film_titles=[]
+        for film in Film.film.planets:
+            if planet.url in film.planets:
+                film_titles.append(f"{film.title}")
+        print(f"Películas: {', '.join(film_titles) if film_titles else 'Ninguno'}")
 
 def search_characters():
     search_query=input("Introduzca parte del nombre del personaje para buscar:  ")
     print("\nResultados de la búsqueda: ")
     for character in Character.character_list:
-        if search_query.lower() in character.namemlowe():
-            print(f"Nombre: {character.name}, Planeta de origen: {character.homeworld}, Género: {character.gender}")
+        if search_query.lower() in character.name.lower():
+            print(f"\n\nNombre: {character.name}")
+            print(f"Género: {character.gender}")
 
+            #Finding film titles
+            film_titles=[]
+            for film in Film.film_list:
+                if character.url in film.characters:
+                    film_titles.append(f"{film.title}")
+            print(f"Películas: {', '.join(film_titles) if film_titles else 'None'}")
+
+            #Finding species name
+            species_name="Unknown"
+            for species in Species.species_list:
+                if character.url in species.people:
+                    species_name=species.name
+                    break
+            print(f"Especies: {species_name}")
+
+            #Finding starship name
+            starship_names=[]
+            for starship in Starship.starship_list:
+                if character.url in starship.pilots:
+                    starship_names.append(f"{starship.name}")
+            print(f"Naves: {', '.join(starship_names) if starship_names else 'None'}")
+
+            #Finding vehicle name
+            film_titles=[]
+            for film in Film.film_list:
+                if character.url in film.characters:
+                    film_titles.append(f"{film.title}")
+            print(f"Vehículos: {', '.join(vehicle_names) if vehicle_names else 'None'}")
+
+### Submenus
 def submenu():
     while True:
         print("\nSeleccione una opción del submenú:")
@@ -389,6 +500,7 @@ def missions_submenu():
         else:
             print("Opción no válida. Por favor, intente de nuevo")
 
+### Main menu
 def main():
     while True:
         print("\nBienvenido a Star Wars Wikis!")
@@ -401,10 +513,31 @@ def main():
         selec=input(">>> ")
 
         if selec=="1":
-            submenu()
+            print('loading data from swapi...')
+            load_films_from_api()
+            print("films loaded...")
+            load_character_from_api()
+            print("characters loaded...")
+            load_planets_from_api()
+            print("planets loaded...")
+            load_vehicles_from_api()
+            print("vehicles loaded...")
+            load_starships_from_api()
+            print("starships loaded...")
+            load_species_from_api()
+            print("species loaded...")
+            print('Finished loading all apis, starting application...')
         elif selec== "2":
-            statistics_submenu()
+            load_character_from_csv()
+            load_weapons_from_csv()
+            load_planets_from_csv()
+            load_starships_from_csv()
+            statistics_submenu_submenu()
         elif selec=="3":
+            load_characters_from_csv()
+            load_weapons_from_csv()
+            load_planets_from_csv()
+            load_starships_from_csv()
             missions_submenu()
         elif selec=="4":
             print("Gracias por usar Star Wars Wikis. Hasta pronto!")
@@ -412,24 +545,8 @@ def main():
         else:
             print("Opción no válida. Por favor, intente de nuevo")
 
-#prin('loading data from swapi...')
-#load_films_from_api()
-#print("films loaded...")
-#load_character_from_api()
-#print("characters loaded...")
-#load_planets_from_api()
-#print("planets loaded...")
-#load_starships_from_api()
-#print("starships loaded...")
-#load_species_from_api()
-#print("species loaded...")
-#print('Finished loading all apis, starting application...)
-#save_data_to_files()
-#print("data saved succesfully in txt files")
-
-load_data_from_files()
-print('data succesfully loaded from files')
 main()
+
 
 
 
