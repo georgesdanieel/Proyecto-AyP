@@ -1,27 +1,18 @@
 import requests
 import json
+import os
+import csv
 from film import Film 
 from character import Character
 from planet import Planet
 from species import Species
 from vehicle import Vehicle
 from starship import Starship
+from weapon import Weapon
 from stats import *
 from missions import *
 
-def load_homeworld_name(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        data = response.json()
-        return data['result']['properties']['name']
-    return "Unknown"
-def load_entity_names(urls):
-    names = []
-    for url in urls:
-        response = requests.get(url)
-        data = response.json()
-        names.append(data['result']['properties']['name'])
-    return names
+### API loaders
 def convert_to_number(value, dtype=float):
     """ Intenta convertir un valor a un tipo numérico dado, maneja excepciones y valores especiales. """
     if value.lower() == 'unknown':
@@ -32,17 +23,12 @@ def convert_to_number(value, dtype=float):
     except ValueError:
         return None
 def load_films_from_api():
+    Film.film_list = []
     api_url = "https://www.swapi.tech/api/films"
     response = requests.get(api_url)
     data = response.json()
     for film_data in data['result']:
-        # Cargar los nombres de las entidades relacionadas
-        characters = load_entity_names(film_data['properties']['characters'])
-        starships = load_entity_names(film_data['properties']['starships'])
-        vehicles = load_entity_names(film_data['properties']['vehicles'])
-        species = load_entity_names(film_data['properties']['species'])
-        planets = load_entity_names(film_data['properties']['planets'])
-        
+      
         film = Film(
             title=film_data['properties']['title'],
             episode_id=film_data['properties']['episode_id'],
@@ -50,17 +36,18 @@ def load_films_from_api():
             director=film_data['properties']['director'],
             producer=film_data['properties']['producer'],
             release_date=film_data['properties']['release_date'],
-            species=species,
-            starships=starships,
-            vehicles=vehicles,
-            characters=characters,
-            planets=planets,
+            species=film_data['properties']['species'],         # # #
+            starships=film_data['properties']['starships'],         # # #
+            vehicles=film_data['properties']['vehicles'],         # # #
+            characters=film_data['properties']['characters'],         # # #
+            planets=film_data['properties']['planets'],         # # #
             url=film_data['properties']['url'],
             created=film_data['properties']['created'],
             edited=film_data['properties']['edited']
         )
         Film.film_list.append(film)
 def load_character_from_api():
+    Character.character_list = []
     api_url = "https://www.swapi.tech/api/people"
     while api_url:  # Loop para manejar la paginación
         response = requests.get(api_url)
@@ -68,15 +55,8 @@ def load_character_from_api():
         for character_data in data['results']:  # Uso de la clave correcta 'results'
             # Cargar las URLs para cada personaje para obtener más detalles
             character_detail_response = requests.get(character_data['url'])
-            character_detail = character_detail_response.json()['result']['properties']
-            
-            # Obtener el nombre del homeworld del personaje
-            if character_detail['homeworld']:
-                homeworld_response = requests.get(character_detail['homeworld'])
-                homeworld_data = homeworld_response.json()['result']['properties']
-                homeworld_name = homeworld_data['name']
-            else:
-                homeworld_name = "Unknown"  # Si no hay URL del homeworld, asignar un valor por defecto
+            character_detail = character_detail_response.json()['result']['properties']     
+            homeworld_name = "Unknown"  # Si no hay URL del homeworld, asignar un valor por defecto
 
             # Crear instancia de Character con los datos disponibles, incluyendo el nombre del homeworld
             character = Character(
@@ -88,15 +68,16 @@ def load_character_from_api():
                 height=character_detail['height'],
                 mass=character_detail['mass'],
                 skin_color=character_detail['skin_color'],
-                homeworld=homeworld_name,  # Usar el nombre del homeworld
+                homeworld=character_detail['homeworld'],  # url homeworld
                 url=character_detail['url'],
-                created=character_detail['created'],
-                edited=character_detail['edited']
+                weight= None
+
             )
             Character.character_list.append(character)
 
         api_url = data.get('next', None)  # Actualizar el URL para la siguiente página
 def load_planets_from_api():
+    Planet.planet_list = []
     api_url = "https://www.swapi.tech/api/planets"
     while api_url:  # Loop para manejar la paginación
         response = requests.get(api_url)
@@ -105,7 +86,7 @@ def load_planets_from_api():
             # Cargar las URLs para cada planeta para obtener más detalles
             planet_detail_response = requests.get(planet_data['url'])
             planet_detail = planet_detail_response.json()['result']['properties']
-
+            
             # Crear instancia de Planet con los datos disponibles
             planet = Planet(
                 name=planet_detail['name'],
@@ -119,12 +100,15 @@ def load_planets_from_api():
                 surface_water=planet_detail['surface_water'],
                 url=planet_detail['url'],
                 created=planet_detail['created'],
-                edited=planet_detail['edited']
+                edited=planet_detail['edited'],
+                films= None,
+                residents= None
             )
             Planet.planet_list.append(planet)
-
+        
         api_url = data['next']  # Actualizar el URL para la siguiente página
 def load_vehicles_from_api():
+    Vehicle.vehicle_list = []
     api_url = "https://www.swapi.tech/api/vehicles"
     while api_url:  # Loop para manejar la paginación
         response = requests.get(api_url)
@@ -134,9 +118,6 @@ def load_vehicles_from_api():
             vehicle_detail_response = requests.get(vehicle_data['url'])
             vehicle_detail = vehicle_detail_response.json()['result']['properties']
             
-            # Cargar los nombres de films y pilotos si existen
-            films_names = load_entity_names(vehicle_detail['films']) if 'films' in vehicle_detail else []
-            pilots_names = load_entity_names(vehicle_detail['pilots']) if 'pilots' in vehicle_detail else []
 
 
             # Crear instancia de Vehicle con los datos disponibles
@@ -152,17 +133,17 @@ def load_vehicles_from_api():
                 max_atmosphering_speed=vehicle_detail['max_atmosphering_speed'],
                 cargo_capacity=vehicle_detail['cargo_capacity'],
                 consumables=vehicle_detail['consumables'],
-                films=films_names,  # Usamos los nombres cargados
-                pilots=pilots_names,  # Usamos los nombres cargados
+                films=vehicle_detail['films'],  ###
+                pilots=vehicle_detail['pilots'],  ###
                 url=vehicle_detail['url'],
                 created=vehicle_detail['created'],
                 edited=vehicle_detail['edited']
             )
             Vehicle.vehicle_list.append(vehicle)
-
+        
         api_url = data['next']  # Actualizar el URL para la siguiente página
 def load_starships_from_api():
-
+    Starship.starship_list = []
     api_url = "https://www.swapi.tech/api/starships"
     while api_url:
         response = requests.get(api_url)
@@ -170,7 +151,7 @@ def load_starships_from_api():
         for starship_data in data['results']:
             starship_detail_response = requests.get(starship_data['url'])
             starship_detail = starship_detail_response.json()['result']['properties']
-
+            
             # Utilizar la función auxiliar para convertir y manejar valores
             starship = Starship(
                 name=starship_detail['name'],
@@ -186,15 +167,17 @@ def load_starships_from_api():
                 MGLT=convert_to_number(starship_detail['MGLT'], int),
                 cargo_capacity=convert_to_number(starship_detail['cargo_capacity'], int),
                 consumables=starship_detail['consumables'],
-                pilots=load_entity_names(starship_detail['pilots']),
+                pilots=starship_detail['pilots'],
                 url=starship_detail['url'],
                 created=starship_detail['created'],
-                edited=starship_detail['edited']
+                edited=starship_detail['edited'],
+                films= None
             )
             Starship.starship_list.append(starship)
-
+        
         api_url = data.get('next')  # Actualizar el URL para la siguiente página
 def load_species_from_api():
+    Species.species_list = []
     api_url = "https://www.swapi.tech/api/species"
     while api_url:
         response = requests.get(api_url)
@@ -202,10 +185,92 @@ def load_species_from_api():
         for species_data in data['results']:
             species_detail_response = requests.get(species_data['url'])
             species_detail = species_detail_response.json()['result']['properties']
+            
 
-            # Usar una función auxiliar para cargar los nombres desde los URLs de personas
-            people_names = load_entity_names(species_detail['people']) if species_detail['people'] else []
-            homeworld_name = load_homeworld_name(species_detail['homeworld']) if species_detail['homeworld'] else "Unknown"
+            species = Species(
+                name=species_detail['name'],
+                classification=species_detail['classification'],
+                designation=species_detail['designation'],
+                average_height=species_detail['average_height'],
+                average_lifespan=species_detail['average_lifespan'],
+                hair_colors=species_detail['hair_colors'],
+                skin_colors=species_detail['skin_colors'],
+                eye_colors=species_detail['eye_colors'],
+                homeworld=species_detail['homeworld'],
+                language=species_detail['language'],
+                people=species_detail['people'],
+                url=species_detail['url'],
+                created=species_detail['created'],
+                edited=species_detail['edited']
+            )
+            Species.species_list.append(species)
+        
+        api_url = data.get('next')  # Actualizar el URL para la siguiente página
+
+###CSV loaders
+def load_characters_from_csv():
+    Character.character_list = []
+    csv_path = os.path.join(os.path.dirname(__file__), 'csv', 'characters.csv')
+    with open(csv_path, mode='r', encoding='utf-8') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            character = Character(
+                name=row['name'],
+                birth_year=row['year_born'],
+                eye_color=row['eye_color'],
+                gender=row['gender'],
+                hair_color=row['hair_color'],
+                height=row['height'],
+                weight=row['weight'],
+                skin_color=row['skin_color'],
+                homeworld=row['homeworld'],
+                url=None,
+            )
+            Character.character_list.append(character)
+    print('Characters successfully loaded from CSV')
+def load_weapons_from_csv():
+    Weapon.weapon_list = []
+    csv_path = os.path.join(os.path.dirname(__file__), 'csv', 'weapons.csv')
+    with open(csv_path, mode='r', encoding='utf-8') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            weapon = Weapon(
+                weapon_id=row['id'],
+                name=row['name'],
+                model=row['model'],
+                manufacturer=row['manufacturer'],
+                cost_in_credits=row['cost_in_credits'],
+                length=row['length'],
+                weapon_type=row['type'],
+                description=row['description'],
+                films=row['films'].split(',')  # Assuming films are stored as comma-separated URLs
+            )
+            Weapon.weapon_list.append(weapon)
+    
+    print('Weapons successfully loaded from CSV')
+def load_planets_from_csv():
+    Planet.planet_list = []
+    csv_path = os.path.join(os.path.dirname(__file__), 'csv', 'planets.csv')
+    with open(csv_path, mode='r', encoding='utf-8') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            planet = Planet(
+                name=row['name'],
+                climate=row['climate'],
+                diameter=row['diameter'],
+                gravity=row['gravity'],
+                orbital_period=row['orbital_period'],
+                population=row['population'],
+                rotation_period=row['rotation_period'],
+                terrain=row['terrain'],
+                surface_water=row['surface_water'],
+                residents=row['residents'].split(';') if row['residents'] else [],
+                films=row['films'].split(';') if row['films'] else [],
+                url=None,
+                created=None,
+                edited=None
+            )
+            Planet.planet_list.append(planet)
 
             species=Species(
                 name=species_detail['name'], classification=species_detail['classification'], designation=species_detail['designation'],
