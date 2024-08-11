@@ -271,30 +271,7 @@ def load_planets_from_csv():
                 edited=None
             )
             Planet.planet_list.append(planet)
-
-            species=Species(
-                name=species_detail['name'], 
-                classification=species_detail['classification'], 
-                designation=species_detail['designation'],
-                average_height=species_detail['average_height'], 
-                average_lifespan=species_detail['average_life'], 
-                hair_colors=species_detail['hair_color'], 
-                skin_colors=species_detail['skin_color'], 
-                eye_colors=species_detail['name'], 
-                language=species_detail['language'], 
-                homeworld=species_detail['homeworld'], 
-                people=species_detail['people'], 
-                url=species_detail['url'], 
-                created=species_detail['created'], 
-                edited=species_detail['edited']
-            )
-            Species.species_list.append(species)
-        
-        api_url=data.get('next')
-
-
-
-
+            
     print('Planets successfully loaded from CSV')
 def load_starships_from_csv():
     Starship.starship_list=[]

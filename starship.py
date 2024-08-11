@@ -21,4 +21,10 @@ class Starships:
         self.edited = edited
 
     def __repr__(self):
-        return(f"Starship(name={self.name}, name={self.name}, model={self.model}, starship_class={self.starship_class}, manufacturer={self.manufacturer}, cost_in_credits={self.cost_in_credits}, lenght={self.lenght}, crew={self.crew}, passengers={self.passengers}, max_atmosphering_speed={self.max_atmosphering_speed}, hyperdrive_rating={self.hyperdrive_rating}, MGLT={self.MGLT}, cargo_capacity={self.cargo_capacity}, consumables={self.consumables}, pilots={self.pilots}, url={self.url}, created={self.created}, edited={self.edited})")
+        return(f"Starship(name={self.name}, name={self.name}, model={self.model}, 
+               starship_class={self.starship_class}, manufacturer={self.manufacturer}, 
+               cost_in_credits={self.cost_in_credits}, lenght={self.lenght}, crew={self.crew}, 
+               passengers={self.passengers}, max_atmosphering_speed={self.max_atmosphering_speed}, 
+               hyperdrive_rating={self.hyperdrive_rating}, MGLT={self.MGLT}, cargo_capacity={self.cargo_capacity}, 
+               consumables={self.consumables}, pilots={self.pilots}, url={self.url}, created={self.created}, 
+               edited={self.edited})")
