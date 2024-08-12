@@ -10,7 +10,7 @@ characters = []
 def planet_graphs():
 
     for resident in df['residents']:
-        characters.append(len(resident.split(','))) 
+        characters.append(resident) 
 
     plt.barh(planets,characters, color='red') #quiero q se me separe cada 1 unidad
 
