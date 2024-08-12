@@ -277,7 +277,7 @@ def load_planets_from_csv():
     print('Planets successfully loaded from CSV')
 def load_starships_from_csv():
     Starship.starship_list=[]
-    csv_path= os.path.join(os.path.diname(__file__), 'csv', 'starships.csv')
+    csv_path= os.path.join(os.path.dirname(__file__), 'csv', 'starships.csv')
     with open(csv_path, mode='r', encoding='utf-8') as file:
         csv_reader=csv.DictReader(file)
         for row in csv_reader:
@@ -286,7 +286,7 @@ def load_starships_from_csv():
                 model=row['model'],
                 manufacturer=row['manufacturer'],
                 cost_in_credits=row['cost_in_credits'],
-                lenght=row['lenght'],
+                lenght=row['length'],
                 max_atmosphering_speed=row['max_atmosphering_speed'],
                 crew=row['crew'],
                 passengers=row['passengers'],
@@ -297,9 +297,9 @@ def load_starships_from_csv():
                 starship_class=row['starship_class'],
                 pilots=row['pilots'],
                 films=row['films'],
-                url=row['url'],
-                created=row['created'],
-                edited=row['edited']
+                url=None,
+                created=None,
+                edited=None,
                 )
 
             Starship.starship_list.append(starship)
