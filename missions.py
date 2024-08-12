@@ -140,7 +140,6 @@ def ver_mision():
         for mision in missions:
             listar_opciones(mision['nombre'])
 
-    print(len(missions))
     seleccion=input('Seleccione una mision para visualizar: ')
     if not seleccion.isdigit() or 1 <= int(seleccion) <= len(missions):
         print("Opción inválida. Por favor, elija una opción válida.")
