@@ -1,6 +1,7 @@
 from planet import Planet
 from starship import Starship
 from character import Character
+from weapons import Weapon
 
 missions=[]
 #Lista global para almacenar las misiones
@@ -48,7 +49,8 @@ def contruir_mision():
 
     #Solicitar las armas a utilizar 
     print("Seleccione hasta 7 armas:")
-    mision["armas"]=seleccionar_opcion(armas_disponibles, max_seleccion=7)
+    armas =[weapon.name for weapon in Weapon.weapon_list]
+    mision["armas"]=seleccionar_opcion(armas, max_seleccion=7)
 
     #Solicitar los integrantes de la misión
     print("Seleccione hasta 7 integrantes:")
