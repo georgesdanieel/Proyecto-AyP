@@ -8,8 +8,7 @@ longitud=df['length']
 cargo=df['cargo_capacity']
 hiperimpulsor=df['hyperdrive_rating']
 mglt=df['MGLT']
-
-clase=df.groupby['starship_class']
+clase=df.groupby('starship_class')
 
 def spaceship_graphs():
     menu={
@@ -23,38 +22,15 @@ def spaceship_graphs():
         for key, value in menu.items():
             print(f'{key}- {value}')
         opcion_seleccionada=input('--->  ')
+        if opcion_seleccionada=='1':
+            plt.figure(figsize=(14,9))
+            plt.barh(clase, longitud, color='green')
 
-plt.figure(figsize=(14,9))
-plt.barh(clase, longitud, color='green')
+            plt.xticks(range(0,20000,1000))
+            plt.ylabel('Nombre de la nave')
+            plt.xlabel('Longitud')
+            plt.title('Comparacion de la longitud de cada nave')
 
-plt.xticks(range(0,20000,1000))
-plt.ylabel('Nombre de la nave')
-plt.xlabel('Longitud')
-
-plt.title('Comparacion de la longitud de cada nave')
-
-plt.show()
-
-plt.figure(figsize=(14,9))
-plt.barh(clase, cargo, color='blue')
-
-plt.ylabel('Nombre de la nave')
-plt.xlabel('Cargo')
-
-plt.title('Capacidad de carga de la nave')
-
-plt.show()
+spaceship_graphs()
 
 
-
-plt.figure(figsize=(14,9))
-
-plt.barh(clase, mglt, color='purple')
-plt.xticks(range(0,150,10))
-
-plt.ylabel('Nombre de la nave')
-plt.xlabel('MGLT')
-
-plt.title('MGLT por nave')
-
-plt.show()
