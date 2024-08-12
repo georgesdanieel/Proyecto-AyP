@@ -7,10 +7,15 @@ df=pd.read_csv(file)
 nave=df['name']
 longitud=df['length']
 cargo=df['cargo_capacity']
-hiperimpulsor=df['']
+hiperimpulsor=df['hyperdrive_rating']
 mglt=df['MGLT']
 
+parametros=[longitud,cargo,hiperimpulsor,mglt]
+
+clasificacion= {}
+
 def spaceship_graphs():
+
 
 plt.figure(figsize=(14,9))
 plt.barh(nave, longitud, color='green')
