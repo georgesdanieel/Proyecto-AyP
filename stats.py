@@ -27,7 +27,7 @@ def show_stats():
     while True:
         print('\n Seleccione una opcion para ver sus estadisticas. Coloca cualquier letra para salir')
         for key, value in opciones.items():
-            print(f'{key}. {value}')
+            print(f'{key}- {value}')
         opcion_seleccionada=input('--->  ')
 
         if opcion_seleccionada=='1':
