@@ -286,7 +286,7 @@ def load_starships_from_csv():
                 model=row['model'],
                 manufacturer=row['manufacturer'],
                 cost_in_credits=row['cost_in_credits'],
-                lenght=row['length'],
+                length=row['length'],
                 max_atmosphering_speed=row['max_atmosphering_speed'],
                 crew=row['crew'],
                 passengers=row['passengers'],
