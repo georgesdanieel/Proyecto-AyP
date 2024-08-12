@@ -10,7 +10,7 @@ cargo=df['cargo_capacity']
 hiperimpulsor=df['']
 mglt=df['MGLT']
 
-def 
+def spaceship_graphs():
 
 plt.figure(figsize=(14,9))
 plt.barh(nave, longitud, color='green')
