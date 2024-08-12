@@ -458,19 +458,19 @@ def missions_submenu():
 
         if sub_selec=="1":
             print("Contruir misión")
-            construir_musion()
+            construir_mision()
         elif sub_selec=="2":
             print("Modificar misión")
             modificar_mision()
         elif sub_selec=="3":
             print("Visualizar misión")
-            visualizar_mision()
+            ver_mision()
         elif sub_selec=="4":
             print("Guardar misiones")
-            guardar_misiones()
+            guardar_mision()
         elif sub_selec=="5":
             print("Cargar misiones")
-            cargar_misiones()
+            cargar_mision()
         elif sub_selec=="6":
             print("Regresando al menú principal")
             break
