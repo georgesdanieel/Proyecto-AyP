@@ -2,9 +2,6 @@ from planet import Planet
 from starship import Starship
 from character import Character
 
-#Lista de armas disponibles (si no tienes una clase Weapon, define las armas aquí)
-armas_disponibles=["Blaster", "Lightsaber", "Thermal Detonator", "Bowcaster"]
-
 missions=[]
 #Lista global para almacenar las misiones
 
