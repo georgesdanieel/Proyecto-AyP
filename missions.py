@@ -32,7 +32,7 @@ def contruir_mision():
         print("No se pueden definir más de 5 misiones")
         return
     
-    mision={}
+    mision={} 
     
     #Solicitar el nombre de la misión
     mision["nombre"]= input("Nombre de la misión: ")
@@ -60,3 +60,16 @@ def contruir_mision():
     #Añadir la misión a la lista de misiones
     missions.append(mision)
     print(f"Misión '{mision['nombre']}' construida exitosamente.")
+
+def modificar_mision():
+    if not missions:
+        print("No hay misiones definidas para el momento")
+        return
+    else: 
+        print('Misiones definidas: ')
+        for mision in missions:
+            listar_opciones(mision['nombre'])
+    
+    seleccion=input(f'Seleccione una mision para modificar: ')
+
+    
