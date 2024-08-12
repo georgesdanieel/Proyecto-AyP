@@ -318,7 +318,7 @@ def view_species():
         print(f"Clasificación: {species.classification}")
 
         homeworld_name="Desconocido"
-        for planet in Planet.pplanet_list:
+        for planet in Planet.planet_list:
             if planet.url==species.homeworld:
                 homeworld_name=planet.name
                 break
