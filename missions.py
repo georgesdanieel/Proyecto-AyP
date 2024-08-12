@@ -100,34 +100,34 @@ def modificar_mision():
             print('Seleccione el nuevo planeta destino: ')
             for planet in Planet.planet_list:
                 planetas=planet.name
-                print(f"{planetas}")
                 nuevo_planeta = seleccionar_opcion(planetas, max_seleccion=1)[0]
                 mision['planeta_destino']=nuevo_planeta
                 print(f'El planeta destino de la mision ha sido actualizado: {mision['planeta_destino']}')
-            elif opcion=='3':
+        elif opcion=='3':
             print('Seleccione la nueva nave a utilizar: ')
             for starship in Starship.starship_list:
-                planetas=planet.name
-                print(f"{planetas}")
-                nuevo_planeta = seleccionar_opcion(planetas, max_seleccion=1)[0]
-                mision['planeta_destino']=nuevo_planeta
-                print(f'El planeta destino de la mision ha sido actualizado: {mision['planeta_destino']}')
-            elif opcion=='2':
-            print('Seleccione el nuevo planeta destino: ')
-            for planet in Planet.planet_list:
-                planetas=planet.name
-                print(f"{planetas}")
-                nuevo_planeta = seleccionar_opcion(planetas, max_seleccion=1)[0]
-                mision['planeta_destino']=nuevo_planeta
-                print(f'El planeta destino de la mision ha sido actualizado: {mision['planeta_destino']}')
-            elif opcion=='2':
-            print('Seleccione el nuevo planeta destino: ')
-            for planet in Planet.planet_list:
-                planetas=planet.name
-                print(f"{planetas}")
-                nuevo_planeta = seleccionar_opcion(planetas, max_seleccion=1)[0]
-                mision['planeta_destino']=nuevo_planeta
-                print(f'El planeta destino de la mision ha sido actualizado: {mision['planeta_destino']}')
+                naves=starship.name
+                nueva_nave = seleccionar_opcion(naves, max_seleccion=1)[0]
+                mision['nave']=nueva_nave
+                print(f'La nave de la mision ha sido actualizada: {mision['nave']}')
+        elif opcion=='4':
+            print('Seleccione las nuevas armas: ')
+            for weapons in Weapon.weapon_list:
+                armas=weapons.name
+                nuevas_armas = seleccionar_opcion(armas)
+                mision['armas']=nuevas_armas
+                print(f'Armas actualizadas: {mision['armas']}')
+        elif opcion=='5':
+            print('Seleccione los nuevos integrantes: ')
+            for character in Character.character_list:
+                integrantes=character.name
+                nuevos_integrantes= seleccionar_opcion(integrantes)
+                mision['integrantes']=nuevos_integrantes
+                print(f'Nuevos integrantes de la mision: {mision['integrantes']}')
+        elif opcion == "5":
+            break
+        else:
+            print("Selección no válida. Por favor, intente de nuevo.")
             
 
 
