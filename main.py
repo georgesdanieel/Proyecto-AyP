@@ -436,7 +436,7 @@ def statistics_submenu():
             plot_starship_characteristics(Starship.starship_list)
         elif sub_selec=="3":
             print("Mostrando estadísticas sobre naves")
-            calculate_starship_statistics(Starship.starship_list)
+            show_stats()
         elif sub_selec=="4":
             print("Regresando al menú principal")
             break
