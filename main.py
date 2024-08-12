@@ -340,7 +340,7 @@ def view_species():
 def view_planets():
     print("\nLista de planetas:")
     for planet in Planet.planet_list:
-        print(f"Nombre: {planet.title}")
+        print(f"Nombre: {planet.name}")
         print(f"Período de órbita: {planet.orbital_period}") 
         print(f"Período de rotación: {planet.rotation_period}") 
         print(f"Población: {planet.population}")
@@ -353,7 +353,7 @@ def view_planets():
         print(f"Personajes: {', '.join(people_names) if people_names else 'Ninguno'}")
 
         film_titles=[]
-        for film in Film.film.planets:
+        for film in Film.planets:
             if planet.url in film.planets:
                 film_titles.append(f"{film.title}")
         print(f"Películas: {', '.join(film_titles) if film_titles else 'Ninguno'}")
@@ -504,6 +504,7 @@ def main():
             load_species_from_api()
             print("species loaded...")
             print('Finished loading all apis, starting application...')
+            submenu()
         elif selec== "2":
             load_characters_from_csv()
             load_weapons_from_csv()
