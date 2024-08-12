@@ -22,4 +22,3 @@ def planet_graphs():
 
     plt.show()
 
-planet_graphs()
