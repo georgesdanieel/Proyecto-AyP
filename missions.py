@@ -69,7 +69,6 @@ def modificar_mision():
         print('Misiones definidas: ')
         for mision in missions:
             listar_opciones(mision['nombre'])
-    
     print(len(missions))
     seleccion=input('Seleccione una mision para modificar: ')
     if not seleccion.isdigit() or 1 <= int(seleccion) <= len(missions):
@@ -128,6 +127,36 @@ def modificar_mision():
             break
         else:
             print("Selección no válida. Por favor, intente de nuevo.")
+        
+    print('Mision modificada exitosamente')
+
+def ver_mision():
+    if not missions:
+        print("No hay misiones definidas.")
+        return
+    else: 
+        print('Misiones definidas: ')
+        for mision in missions:
+            listar_opciones(mision['nombre'])
+
+    print(len(missions))
+    seleccion=input('Seleccione una mision para visualizar: ')
+    if not seleccion.isdigit() or 1 <= int(seleccion) <= len(missions):
+        print("Opción inválida. Por favor, elija una opción válida.")
+        return
+
+    mision_escogida=int(seleccion) - 1
+    mision=missions[mision_escogida]
+
+    print('\nDetalles de la misión')
+    print(f"'{mision['nombre']}':")
+    print(f"Planeta destino: {mision['planeta_destino']}")
+    print(f"Nave a utilizar: {mision['nave']}")
+    print(f"Armas: {', '.join(mision['armas'])}")
+    print(f"Integrantes: {', '.join(mision['integrantes'])}")
+
+
+
             
 
 
