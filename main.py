@@ -336,7 +336,7 @@ def view_species():
         for film in Film.film_list:
             if species.url in film.species:
                 films.append(f"{film.title}")
-        print(f"Películas: {', '.join(film) if film else 'Ninguno'}")
+        print(f"Películas: {', '.join(films) if film else 'Ninguno'}")
 
 def view_planets():
     print("\nLista de planetas:")
