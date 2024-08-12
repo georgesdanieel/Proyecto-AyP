@@ -55,7 +55,7 @@ def contruir_mision():
     #Solicitar los integrantes de la misión
     print("Seleccione hasta 7 integrantes:")
     integrantes=[character.name for character in Character.character_list]
-    mision["integrantes"]=seleccionar_opcion(integrantes, max_seleccion=7, permitir_repetido=False)
+    mision["integrantes"]=seleccionar_opcion(integrantes, max_seleccion=7, permitir_repetidos=False)
 
     #Añadir la misión a la lista de misiones
     missions.append(mision)
