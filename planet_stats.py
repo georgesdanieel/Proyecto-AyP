@@ -8,17 +8,17 @@ planets=df['name']
 characters = []
 
 
+def planet_graphs():
+    for resident in df['residents']:
+        characters.append(len(resident.split(',')))
 
-for resident in df['residents']:
-    characters.append(len(resident.split(',')))
+    plt.barh(planets,characters, color='red') #quiero q se me separe cada 1 unidad
 
-plt.barh(planets,characters, color='red') #quiero q se me separe cada 1 unidad
+    plt.xticks(range(0,5,1))
+    plt.xlabel('Número de personajes')
+    plt.ylabel('Planetas')
 
-plt.xticks(range(0,5,1))
-plt.xlabel('Número de personajes')
-plt.ylabel('Planetas')
+    plt.title('Número de personajes por planeta')
 
-plt.title('Número de personajes por planeta')
-
-plt.show()
+    plt.show()
 
