@@ -309,7 +309,7 @@ def load_starships_from_csv():
 def view_movies():
     print("\nLista de películas:")
     for film in Film.film_list:
-        print(f"Título: {film.title}, Episode: {film.episode_id}, Fecha de lanzamiento: {film.release_date}, Opening crawl: {film.opening_crawl},\nDirector: {film.director}")
+        print(f"Título: {film.title}, Episode: {film.episode_id}, Fecha de lanzamiento: {film.release_date}, Opening crawl: {film.opening_crawl},\nDirector: {film.director}\n")
 
 def view_species():
     print("\nLista de especies:")
