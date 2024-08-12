@@ -16,7 +16,7 @@ def personaje_por_mundo():
     plt.ylabel('Cantidad de personajes')
     plt.show()
 
-def characteristicas_naves(starship_list):
+def caracteristicas_naves(starship_list):
 
     data = {
         "Name": [],
