@@ -120,8 +120,6 @@ def load_vehicles_from_api():
             vehicle_detail_response = requests.get(vehicle_data['url'])
             vehicle_detail = vehicle_detail_response.json()['result']['properties']
             
-
-
             # Crear instancia de Vehicle con los datos disponibles
             vehicle = Vehicle(
                 name=vehicle_detail['name'],
