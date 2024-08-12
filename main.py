@@ -434,7 +434,7 @@ def statistics_submenu():
             print("Mostrando gráfico de cantidad de personajes por planeta")
             planet_graphs()
         elif sub_selec=="2":
-            plot_starship_characteristics(Starship.starship_list)
+            
         elif sub_selec=="3":
             print("Mostrando estadísticas sobre naves")
             show_stats()
@@ -510,7 +510,7 @@ def main():
             load_weapons_from_csv()
             load_planets_from_csv()
             load_starships_from_csv()
-            statistics_submenu_submenu()
+            statistics_submenu()
         elif selec=="3":
             load_characters_from_csv()
             load_weapons_from_csv()
