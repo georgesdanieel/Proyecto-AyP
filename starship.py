@@ -1,7 +1,7 @@
 class Starship:
     starship_list = []
 
-    def __init__(self, name, model, starship_class, manufacturer, cost_in_credits, length, crew, passengers, max_atmosphering_speed, hyperdrive_rating, MGLT, cargo_capacity, consumables, pilots, url, created, edited) -> None:
+    def __init__(self, name, model, starship_class, manufacturer, cost_in_credits, length, crew, passengers, max_atmosphering_speed, hyperdrive_rating, MGLT, cargo_capacity, consumables, pilots, url, created, edited,films) -> None:
         self.name = name
         self.model = model
         self.starship_class = starship_class
@@ -19,6 +19,7 @@ class Starship:
         self.url = url
         self.created = created
         self.edited = edited
+        self.films=films
 
     def __repr__(self):
         return(f'''Starship(name={self.name},name={self.name},model={self.model},
