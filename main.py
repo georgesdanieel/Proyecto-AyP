@@ -506,7 +506,7 @@ def main():
             print("species loaded...")
             print('Finished loading all apis, starting application...')
         elif selec== "2":
-            load_character_from_csv()
+            load_characters_from_csv()
             load_weapons_from_csv()
             load_planets_from_csv()
             load_starships_from_csv()
