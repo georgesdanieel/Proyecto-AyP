@@ -434,7 +434,6 @@ def statistics_submenu():
             print("Mostrando gráfico de cantidad de personajes por planeta")
             planet_graphs()
         elif sub_selec=="2":
-            print("Mostrando gráficos de características de naves")
             plot_starship_characteristics(Starship.starship_list)
         elif sub_selec=="3":
             print("Mostrando estadísticas sobre naves")
