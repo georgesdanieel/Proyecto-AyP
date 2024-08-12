@@ -70,6 +70,13 @@ def modificar_mision():
         for mision in missions:
             listar_opciones(mision['nombre'])
     
-    seleccion=input(f'Seleccione una mision para modificar: ')
+    print(len(missions))
+    seleccion=input('Seleccione una mision para modificar: ')
+    if not seleccion.isdigit() or 1 <= int(seleccion) <= len(missions):
+        print("Opción inválida. Por favor, elija una opción válida.")
+        return
+    
+    
+
 
     
