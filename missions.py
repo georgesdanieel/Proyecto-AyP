@@ -64,21 +64,22 @@ def construir_mision():
 
 def modificar_mision():
     if not missions:
-        print("No hay misiones definidas para el momento")
+        print("No hay misiones definidas.")
         return
     else: 
         print('Misiones definidas: ')
+        lista_misiones_temp=[]
         for mision in missions:
-            listar_opciones(mision['nombre'])
-    print(len(missions))
-    seleccion=input('Seleccione una mision para modificar: ')
-    if not seleccion.isdigit() or 1 <= int(seleccion) <= len(missions):
+            lista_misiones_temp.append(mision['nombre'])
+        listar_opciones(lista_misiones_temp)
+
+    seleccion=input('Seleccione una mision para visualizar: ')
+    if not seleccion.isdigit() or 1 <= int(seleccion)-1 <= len(missions):
         print("Opción inválida. Por favor, elija una opción válida.")
         return
 
     mision_escogida=int(seleccion) - 1
     mision=missions[mision_escogida]
-
     print(f'Modificando mision {mision['nombre']}')
 
     while True:
@@ -124,7 +125,7 @@ def modificar_mision():
                 nuevos_integrantes= seleccionar_opcion(integrantes)
                 mision['integrantes']=nuevos_integrantes
                 print(f'Nuevos integrantes de la mision: {mision['integrantes']}')
-        elif opcion == "5":
+        elif opcion == "6":
             break
         else:
             print("Selección no válida. Por favor, intente de nuevo.")
@@ -143,19 +144,18 @@ def ver_mision():
         listar_opciones(lista_misiones_temp)
 
     seleccion=input('Seleccione una mision para visualizar: ')
-    if not seleccion.isdigit() or 1 <= int(seleccion) <= len(missions):
+    if not seleccion.isdigit() or 1 <= int(seleccion)-1 <= len(missions):
         print("Opción inválida. Por favor, elija una opción válida.")
         return
 
-    else:
-        mision_escogida=int(seleccion) - 1
-        mision=missions[mision_escogida]
-        print('\nDetalles de la misión')
-        print(f"'{mision['nombre']}':")
-        print(f"Planeta destino: {mision['planeta_destino']}")
-        print(f"Nave a utilizar: {mision['nave']}")
-        print(f"Armas: {', '.join(mision['armas'])}")
-        print(f"Integrantes: {', '.join(mision['integrantes'])}")
+    mision_escogida=int(seleccion) - 1
+    mision=missions[mision_escogida]
+    print('\nDetalles de la misión')
+    print(f"'{mision['nombre']}':")
+    print(f"Planeta destino: {mision['planeta_destino']}")
+    print(f"Nave a utilizar: {mision['nave']}")
+    print(f"Armas: {', '.join(mision['armas'])}")
+    print(f"Integrantes: {', '.join(mision['integrantes'])}")
 
 def guardar_mision():
     if not missions:
@@ -181,7 +181,7 @@ def cargar_mision():
 
     with open("misiones.txt", "r") as file:
         for linea in file:
-            nombre, planeta_destino, nave, armas, integrantes = linea.strip().split('/')
+            nombre, planeta_destino, nave, armas, integrantes = linea.strip().split(',')
             mision = {
                 "nombre": nombre,
                 "planeta_destino": planeta_destino,
