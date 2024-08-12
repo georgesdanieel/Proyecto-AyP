@@ -10,7 +10,9 @@ from vehicle import Vehicle
 from starship import Starship
 from weapons import Weapon
 from stats import *
+from planet_stats import *
 from missions import *
+
 
 ### API loaders
 def convert_to_number(value, dtype=float):
@@ -430,7 +432,7 @@ def statistics_submenu():
         sub_selec=input(">>> ")
         if sub_selec=="1":
             print("Mostrando gráfico de cantidad de personajes por planeta")
-            plot_characters_per_planet(Character.character_list)
+            planet_graphs()
         elif sub_selec=="2":
             print("Mostrando gráficos de características de naves")
             plot_starship_characteristics(Starship.starship_list)
