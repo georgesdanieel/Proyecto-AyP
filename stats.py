@@ -2,15 +2,16 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-def personaje_por_mundo():
+def personaje_por_mundo(character_list):
+    for character in character_list:
+        planet_names = character.homeworld
 
-    file= '/Users/valentinavizcarrondo/Documents/GitHub/Proyecto-AyP/Proyecto-AyP/Proyecto-AyP/csv/characters.csv'
-    df= pd.read_csv(file)
+    df = pd.DataFrame(planet_names, columns=['Planet'])
     
     planet_counts = df['Planet'].value_counts()
 
     plt.figure(figsize=(10, 6))
-    planet_counts.plot(kind='barh', color='red')
+    planet_counts.plot(kind='barh', color='brown')
     plt.title('Cantidad de personajes nacidos en cada planeta')
     plt.xlabel('Planeta')
     plt.ylabel('Cantidad de personajes')
