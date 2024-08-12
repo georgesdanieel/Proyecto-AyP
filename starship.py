@@ -1,4 +1,4 @@
-class Starships:
+class Starship:
     starship_list = []
 
     def __init__(self, name, model, starship_class, manufacturer, cost_in_credits, lenght, crew, passengers, max_atmosphering_speed, hyperdrive_rating, MGLT, cargo_capacity, consumables, pilots, url, created, edited) -> None:
