@@ -283,24 +283,25 @@ def load_starships_from_csv():
         for row in csv_reader:
             starship=Starship(
                 name=row['name'],
-                model=row['model']
-                manufacturer=row['manufacturer']
-                cost_in_credits=row['cost_in_credits']
-                lenght=row['lenght']
-                max_atmosphering_speed=row['max_atmosphering_speed']
-                crew=row['crew']
-                passengers=row['passengers']
-                cargo_capacity=row['cargo_capacity']
-                consumables=row['consumables']
-                hyperdrive_rating=row['hyperdrive_rating']
-                MGLT=row['MGLT']
-                starship_class=row['starship_class']
-                pilots=row['pilots']
-                films=row['films']
-                url=row['url']
-                created=row['created']
+                model=row['model'],
+                manufacturer=row['manufacturer'],
+                cost_in_credits=row['cost_in_credits'],
+                lenght=row['lenght'],
+                max_atmosphering_speed=row['max_atmosphering_speed'],
+                crew=row['crew'],
+                passengers=row['passengers'],
+                cargo_capacity=row['cargo_capacity'],
+                consumables=row['consumables'],
+                hyperdrive_rating=row['hyperdrive_rating'],
+                MGLT=row['MGLT'],
+                starship_class=row['starship_class'],
+                pilots=row['pilots'],
+                films=row['films'],
+                url=row['url'],
+                created=row['created'],
                 edited=row['edited']
-            )
+                )
+
             Starship.starship_list.append(starship)
     print('Starship succesfully loaded from CSV')
 
