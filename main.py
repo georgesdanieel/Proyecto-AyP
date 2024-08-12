@@ -10,10 +10,7 @@ from vehicle import Vehicle
 from starship import Starship
 from weapons import Weapon
 from stats import *
-from planet_stats import *
-from starship_stats import *
 from missions import *
-
 
 ### API loaders
 def convert_to_number(value, dtype=float):
@@ -121,6 +118,8 @@ def load_vehicles_from_api():
             vehicle_detail_response = requests.get(vehicle_data['url'])
             vehicle_detail = vehicle_detail_response.json()['result']['properties']
             
+
+
             # Crear instancia de Vehicle con los datos disponibles
             vehicle = Vehicle(
                 name=vehicle_detail['name'],
@@ -223,11 +222,10 @@ def load_characters_from_csv():
                 hair_color=row['hair_color'],
                 height=row['height'],
                 weight=row['weight'],
-                mass=None,
                 skin_color=row['skin_color'],
                 homeworld=row['homeworld'],
                 url=None,
-                )
+            )
             Character.character_list.append(character)
     print('Characters successfully loaded from CSV')
 def load_weapons_from_csv():
@@ -277,31 +275,30 @@ def load_planets_from_csv():
     print('Planets successfully loaded from CSV')
 def load_starships_from_csv():
     Starship.starship_list=[]
-    csv_path= os.path.join(os.path.dirname(__file__), 'csv', 'starships.csv')
+    csv_path= os.path.join(os.path.diname(__file__), 'csv', 'starships.csv')
     with open(csv_path, mode='r', encoding='utf-8') as file:
         csv_reader=csv.DictReader(file)
         for row in csv_reader:
             starship=Starship(
                 name=row['name'],
-                model=row['model'],
-                manufacturer=row['manufacturer'],
-                cost_in_credits=row['cost_in_credits'],
-                length=row['length'],
-                max_atmosphering_speed=row['max_atmosphering_speed'],
-                crew=row['crew'],
-                passengers=row['passengers'],
-                cargo_capacity=row['cargo_capacity'],
-                consumables=row['consumables'],
-                hyperdrive_rating=row['hyperdrive_rating'],
-                MGLT=row['MGLT'],
-                starship_class=row['starship_class'],
-                pilots=row['pilots'],
-                films=row['films'],
-                url=None,
-                created=None,
-                edited=None,
-                )
-
+                model=row['model']
+                manufacturer=row['manufacturer']
+                cost_in_credits=row['cost_in_credits']
+                lenght=row['lenght']
+                max_atmosphering_speed=row['max_atmosphering_speed']
+                crew=row['crew']
+                passengers=row['passengers']
+                cargo_capacity=row['cargo_capacity']
+                consumables=row['consumables']
+                hyperdrive_rating=row['hyperdrive_rating']
+                MGLT=row['MGLT']
+                starship_class=row['starship_class']
+                pilots=row['pilots']
+                films=row['films']
+                url=row['url']
+                created=row['created']
+                edited=row['edited']
+            )
             Starship.starship_list.append(starship)
     print('Starship succesfully loaded from CSV')
 
@@ -309,7 +306,8 @@ def load_starships_from_csv():
 def view_movies():
     print("\nLista de películas:")
     for film in Film.film_list:
-        print(f"Título: {film.title}, Episode: {film.episode_id}, Fecha de lanzamiento: {film.release_date}, Opening crawl: {film.opening_crawl},Director: {film.director}")
+        print(f"Título: {film.title}, Episode: {film.episode_id}, Fecha de lanzamiento: {film.release_date}, Opening crawl: {film.opening_crawl},
+Director: {film.director}")
 
 def view_species():
     print("\nLista de especies:")
@@ -319,7 +317,7 @@ def view_species():
         print(f"Clasificación: {species.classification}")
 
         homeworld_name="Desconocido"
-        for planet in Planet.planet_list:
+        for planet in Planet.pplanet_list:
             if planet.url==species.homeworld:
                 homeworld_name=planet.name
                 break
@@ -341,7 +339,7 @@ def view_species():
 def view_planets():
     print("\nLista de planetas:")
     for planet in Planet.planet_list:
-        print(f"Nombre: {planet.name}")
+        print(f"\n\Nombre: {planet.title}")
         print(f"Período de órbita: {planet.orbital_period}") 
         print(f"Período de rotación: {planet.rotation_period}") 
         print(f"Población: {planet.population}")
@@ -354,7 +352,7 @@ def view_planets():
         print(f"Personajes: {', '.join(people_names) if people_names else 'Ninguno'}")
 
         film_titles=[]
-        for film in Film.planets:
+        for film in Film.film.planets:
             if planet.url in film.planets:
                 film_titles.append(f"{film.title}")
         print(f"Películas: {', '.join(film_titles) if film_titles else 'Ninguno'}")
@@ -390,11 +388,11 @@ def search_characters():
             print(f"Naves: {', '.join(starship_names) if starship_names else 'None'}")
 
             #Finding vehicle name
-            vehicles_names=[]
+            film_titles=[]
             for film in Film.film_list:
-                if character.url in film.vehicles:
-                    film_titles.append(f"{film.vehicles}")
-            print(f"Vehículos: {', '.join(vehicles_names) if vehicles_names else 'None'}")
+                if character.url in film.characters:
+                    film_titles.append(f"{film.title}")
+            print(f"Vehículos: {', '.join(vehicle_names) if vehicle_names else 'None'}")
 
 ### Submenus
 def submenu():
@@ -432,12 +430,13 @@ def statistics_submenu():
         sub_selec=input(">>> ")
         if sub_selec=="1":
             print("Mostrando gráfico de cantidad de personajes por planeta")
-            planet_graphs()
+            plot_characters_per_planet(Character.character_list)
         elif sub_selec=="2":
-            spaceship_graphs()
+            print("Mostrando gráficos de características de naves")
+            plot_starship_characteristics(Starship.starship_list)
         elif sub_selec=="3":
             print("Mostrando estadísticas sobre naves")
-            show_stats()
+            calculate_starship_statistics(Starship.starship_list)
         elif sub_selec=="4":
             print("Regresando al menú principal")
             break
@@ -459,19 +458,19 @@ def missions_submenu():
 
         if sub_selec=="1":
             print("Contruir misión")
-            construir_mision()
+            construir_musion()
         elif sub_selec=="2":
             print("Modificar misión")
             modificar_mision()
         elif sub_selec=="3":
             print("Visualizar misión")
-            ver_mision()
+            visualizar_mision()
         elif sub_selec=="4":
             print("Guardar misiones")
-            guardar_mision()
+            guardar_misiones()
         elif sub_selec=="5":
             print("Cargar misiones")
-            cargar_mision()
+            cargar_misiones()
         elif sub_selec=="6":
             print("Regresando al menú principal")
             break
@@ -505,13 +504,12 @@ def main():
             load_species_from_api()
             print("species loaded...")
             print('Finished loading all apis, starting application...')
-            submenu()
         elif selec== "2":
-            load_characters_from_csv()
+            load_character_from_csv()
             load_weapons_from_csv()
             load_planets_from_csv()
             load_starships_from_csv()
-            statistics_submenu()
+            statistics_submenu_submenu()
         elif selec=="3":
             load_characters_from_csv()
             load_weapons_from_csv()
