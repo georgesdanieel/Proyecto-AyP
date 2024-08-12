@@ -10,12 +10,14 @@ cargo=df['cargo_capacity']
 hiperimpulsor=df['hyperdrive_rating']
 mglt=df['MGLT']
 
-parametros=[longitud,cargo,hiperimpulsor,mglt]
-
-clasificacion= {}
 
 def spaceship_graphs():
-
+    menu=input('''Selecciona por cual parametro deseas comparar las naves:
+    1. Longitud
+    2. Capacidad de carga
+    3. Hiperimpulsor
+    4. MGLT
+    ''')
 
 plt.figure(figsize=(14,9))
 plt.barh(nave, longitud, color='green')
