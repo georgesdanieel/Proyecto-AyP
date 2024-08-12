@@ -18,11 +18,11 @@ def seleccionar_opcion(opciones, max_seleccion=1, permitir_repetidos=True):
         if seleccion=="":
             break
         if seleccion.isdigit() and 1 <= int(seleccion) <= len(opciones):
-            opcion_selecccionada=opciones[int(seleccion) - 1]
-            if not permitir_repetidos and opcion_seleccionada in seleccionados:
+            eleccion=opciones[int(seleccion) - 1]
+            if not permitir_repetidos and eleccion in seleccionados:
                 print("Esa opción ya ha sido seleccionada. Por favor, elija otra opción.")
             else:
-                seleccionados.append(opcion_selecccionada)
+                seleccionados.append(eleccion)
         else: 
             print("Opción inválida. Por favor, elija una opción válida.")
     return seleccionados
