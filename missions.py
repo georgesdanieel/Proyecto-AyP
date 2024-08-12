@@ -137,8 +137,10 @@ def ver_mision():
         return
     else: 
         print('Misiones definidas: ')
+        contador=1
         for mision in missions:
-            listar_opciones(mision['nombre'])
+            print(f'{contador} - {mision["nombre"]}')
+            contador+=1
 
     seleccion=input('Seleccione una mision para visualizar: ')
     if not seleccion.isdigit() or 1 <= int(seleccion) <= len(missions):
