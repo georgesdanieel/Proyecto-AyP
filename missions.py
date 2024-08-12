@@ -28,7 +28,7 @@ def seleccionar_opcion(opciones, max_seleccion=1, permitir_repetidos=True):
             print("Opción inválida. Por favor, elija una opción válida.")
     return seleccionados
 
-def contruir_mision():
+def construir_mision():
     if len(missions)>=5:
         print("No se pueden definir más de 5 misiones")
         return
@@ -156,7 +156,7 @@ def ver_mision():
     print(f"Armas: {', '.join(mision['armas'])}")
     print(f"Integrantes: {', '.join(mision['integrantes'])}")
 
-def guardar_misiones():
+def guardar_mision():
     if not missions:
         print("No hay misiones definidas para guardar.")
         return
@@ -165,22 +165,22 @@ def guardar_misiones():
         for mision in missions:
             mision["armas"] = ','.join(mision["armas"])
             mision["integrantes"] = ','.join(mision["integrantes"])
-            line = f"{mision['nombre']}|{mision['planeta_destino']}|{mision['nave']}|{mision['armas']}|{mision['integrantes']}"
-            file.write(line)
+            linea = f"{mision['nombre']}|{mision['planeta_destino']}|{mision['nave']}|{mision['armas']}|{mision['integrantes']}"
+            file.write(linea)
     
     print("Misiones guardadas exitosamente.")
 
-def cargar_misiones():
+def cargar_mision():
     if not os.path.exists("misiones.txt"):
-        print("No se encontró el archivo misiones.txt. Asegúrese de haber guardado misiones previamente.")
+        print("No se encontró el archivo misiones.txt")
         return
     
     global missions
     missions = []
 
     with open("misiones.txt", "r") as file:
-        for line in file:
-            nombre, planeta_destino, nave, armas, integrantes = line.strip().split('|')
+        for linea in file:
+            nombre, planeta_destino, nave, armas, integrantes = linea.strip().split('/')
             mision = {
                 "nombre": nombre,
                 "planeta_destino": planeta_destino,
