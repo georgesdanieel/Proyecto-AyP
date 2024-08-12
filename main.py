@@ -8,7 +8,7 @@ from planet import Planet
 from species import Species
 from vehicle import Vehicle
 from starship import Starship
-from weapon import Weapon
+from weapons import Weapon
 from stats import *
 from missions import *
 
