@@ -147,15 +147,15 @@ def ver_mision():
         print("Opción inválida. Por favor, elija una opción válida.")
         return
 
-    mision_escogida=int(seleccion) - 1
-    mision=missions[mision_escogida]
-
-    print('\nDetalles de la misión')
-    print(f"'{mision['nombre']}':")
-    print(f"Planeta destino: {mision['planeta_destino']}")
-    print(f"Nave a utilizar: {mision['nave']}")
-    print(f"Armas: {', '.join(mision['armas'])}")
-    print(f"Integrantes: {', '.join(mision['integrantes'])}")
+    else:
+        mision_escogida=int(seleccion) - 1
+        mision=missions[mision_escogida]
+        print('\nDetalles de la misión')
+        print(f"'{mision['nombre']}':")
+        print(f"Planeta destino: {mision['planeta_destino']}")
+        print(f"Nave a utilizar: {mision['nave']}")
+        print(f"Armas: {', '.join(mision['armas'])}")
+        print(f"Integrantes: {', '.join(mision['integrantes'])}")
 
 def guardar_mision():
     if not missions:
