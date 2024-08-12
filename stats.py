@@ -3,7 +3,7 @@ import pandas as pd
 
 def personaje_por_mundo():
 
-    file= '/Users/valentinavizcarrondo/Downloads/Proyecto-AyP-main/csv/planets.csv'
+    file= '/Users/valentinavizcarrondo/Documents/GitHub/Proyecto-AyP/Proyecto-AyP/Proyecto-AyP/csv/characters.csv'
     df= pd.read_csv(file)
     
     planet_counts = df['Planet'].value_counts()
