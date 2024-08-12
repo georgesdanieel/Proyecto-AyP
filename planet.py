@@ -1,11 +1,11 @@
-class Film:
-    film_list = []
-    def __init__(self, title, episode_id, opening_crawl, director, producer, release_date, species, starships, vehicles, characters, planets, url, created, edited):
-        self.title = title
-        self.episode_id = episode_id
-        self.opening_crawl = opening_crawl
-        self.director = director
-        self.producer = producer
+class Planet:
+    planet_list = []
+    def __init__(self, name, diameter, rotation_period, orbital_period, gravity, release_date, species, starships, vehicles, characters, planets, url, created, edited, residents, films):
+        self.name = name
+        self.diameter = diameter
+        self.rotation_period = rotation_period
+        self.orbital_period = orbital_period
+        self.gravity = gravity
         self.release_date = release_date
         self.species = species
         self.starships = starships
