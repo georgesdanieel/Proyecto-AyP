@@ -11,6 +11,7 @@ from starship import Starship
 from weapons import Weapon
 from stats import *
 from planet_stats import *
+from starship_stats import *
 from missions import *
 
 
@@ -433,7 +434,7 @@ def statistics_submenu():
             print("Mostrando gráfico de cantidad de personajes por planeta")
             planet_graphs()
         elif sub_selec=="2":
-            
+            spaceship_graphs()
         elif sub_selec=="3":
             print("Mostrando estadísticas sobre naves")
             show_stats()
