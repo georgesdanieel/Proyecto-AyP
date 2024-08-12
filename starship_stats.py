@@ -54,4 +54,7 @@ def spaceship_graphs():
             plt.ylabel('Clase de nave')
             plt.xlabel('MGLT')
             plt.title('Comparacion de MGLT por nave')
+            
+        else:
+            print('Ingrese una opcion valida')
 
