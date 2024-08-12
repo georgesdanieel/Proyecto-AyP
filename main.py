@@ -308,8 +308,7 @@ def load_starships_from_csv():
 def view_movies():
     print("\nLista de películas:")
     for film in Film.film_list:
-        print(f"Título: {film.title}, Episode: {film.episode_id}, Fecha de lanzamiento: {film.release_date}, Opening crawl: {film.opening_crawl},
-Director: {film.director}")
+        print(f"Título: {film.title}, Episode: {film.episode_id}, Fecha de lanzamiento: {film.release_date}, Opening crawl: {film.opening_crawl},Director: {film.director}")
 
 def view_species():
     print("\nLista de especies:")
@@ -341,7 +340,7 @@ def view_species():
 def view_planets():
     print("\nLista de planetas:")
     for planet in Planet.planet_list:
-        print(f"\n\Nombre: {planet.title}")
+        print(f"Nombre: {planet.title}")
         print(f"Período de órbita: {planet.orbital_period}") 
         print(f"Período de rotación: {planet.rotation_period}") 
         print(f"Población: {planet.population}")
