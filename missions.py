@@ -1,3 +1,4 @@
+import os
 from planet import Planet
 from starship import Starship
 from character import Character
@@ -111,7 +112,7 @@ def modificar_mision():
                 print(f'La nave de la mision ha sido actualizada: {mision['nave']}')
         elif opcion=='4':
             print('Seleccione las nuevas armas: ')
-            for weapons in Weapon.weapon_list:
+            for weapons in Weapon.weapon_list: #escoge desde 0 las armas
                 armas=weapons.name
                 nuevas_armas = seleccionar_opcion(armas)
                 mision['armas']=nuevas_armas
@@ -155,6 +156,41 @@ def ver_mision():
     print(f"Armas: {', '.join(mision['armas'])}")
     print(f"Integrantes: {', '.join(mision['integrantes'])}")
 
+def guardar_misiones():
+    if not missions:
+        print("No hay misiones definidas para guardar.")
+        return
+
+    with open("misiones.txt", "w") as file:
+        for mision in missions:
+            mision["armas"] = ','.join(mision["armas"])
+            mision["integrantes"] = ','.join(mision["integrantes"])
+            line = f"{mision['nombre']}|{mision['planeta_destino']}|{mision['nave']}|{mision['armas']}|{mision['integrantes']}"
+            file.write(line)
+    
+    print("Misiones guardadas exitosamente.")
+
+def cargar_misiones():
+    if not os.path.exists("misiones.txt"):
+        print("No se encontró el archivo misiones.txt. Asegúrese de haber guardado misiones previamente.")
+        return
+    
+    global missions
+    missions = []
+
+    with open("misiones.txt", "r") as file:
+        for line in file:
+            nombre, planeta_destino, nave, armas, integrantes = line.strip().split('|')
+            mision = {
+                "nombre": nombre,
+                "planeta_destino": planeta_destino,
+                "nave": nave,
+                "armas": armas.split(','),
+                "integrantes": integrantes.split(',')
+            }
+            missions.append(mision)
+
+    print("Misiones cargadas exitosamente.")
 
 
             
