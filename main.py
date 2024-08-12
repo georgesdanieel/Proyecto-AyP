@@ -222,12 +222,12 @@ def load_characters_from_csv():
                 gender=row['gender'],
                 hair_color=row['hair_color'],
                 height=row['height'],
-                weight=row['weight']
+                weight=row['weight'],
                 mass=None,
                 skin_color=row['skin_color'],
                 homeworld=row['homeworld'],
                 url=None,
-            )
+                )
             Character.character_list.append(character)
     print('Characters successfully loaded from CSV')
 def load_weapons_from_csv():
