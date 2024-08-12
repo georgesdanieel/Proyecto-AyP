@@ -390,11 +390,11 @@ def search_characters():
             print(f"Naves: {', '.join(starship_names) if starship_names else 'None'}")
 
             #Finding vehicle name
-            film_titles=[]
+            vehicles_names=[]
             for film in Film.film_list:
-                if character.url in film.characters:
-                    film_titles.append(f"{film.title}")
-            print(f"Vehículos: {', '.join(vehicle_names) if vehicle_names else 'None'}")
+                if character.url in film.vehicles:
+                    film_titles.append(f"{film.vehicles}")
+            print(f"Vehículos: {', '.join(vehicles_names) if vehicles_names else 'None'}")
 
 ### Submenus
 def submenu():
