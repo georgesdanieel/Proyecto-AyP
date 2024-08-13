@@ -13,11 +13,10 @@ def caracteristicas_naves(starship_list):
     }
     for starship in starship_list:
         data["Name"].append(starship.name)
-        data["Length"].append(starship.length)
-        data["Cargo Capacity"].append(starship.cargo_capacity)
-        data["Hyperdrive Rating"].append(starship.hyperdrive_rating)
-        data["MGLT"].append(starship.MGLT)
-
+        data["Length"].append(float(starship.length) if starship.length else 0)
+        data["Cargo Capacity"].append(float(starship.cargo_capacity) if starship.cargo_capacity else 0)
+        data["Hyperdrive Rating"].append(float(starship.hyperdrive_rating) if starship.hyperdrive_rating else 0)
+        data["MGLT"].append(float(starship.MGLT) if starship.MGLT else 0)
     df = pd.DataFrame(data)
     fig, axs = plt.subplots(2, 2, figsize=(14, 10))
 
