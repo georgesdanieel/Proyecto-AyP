@@ -23,4 +23,5 @@ class Species:
                f"skin_colors={self.skin_colors}, eye_colors={self.eye_colors}, homeworld={self.homeworld}, "
                f"language={self.language}, people={self.people}, url={self.url}, "
                f"created={self.created}, edited={self.edited})")
+    
 
