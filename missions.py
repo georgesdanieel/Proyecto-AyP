@@ -110,9 +110,9 @@ def modificar_mision():
         elif opcion=='4':
             print('Seleccione las nuevas armas: ')
             weapons_names=[]
-            for weapons in Weapon.weapon_list: #escoge desde 0 las armas
-                weapons_names.append(weapons.name)
-            nuevas_armas = seleccionar_opcion(weapons)
+            for weapon in Weapon.weapon_list: #escoge desde 0 las armas
+                weapons_names.append(weapon.name)
+            nuevas_armas = seleccionar_opcion(weapons_names, max_seleccion=7)
             mision['armas']=nuevas_armas
             print(f'Armas actualizadas: {mision['armas']}')
         elif opcion=='5':
@@ -120,7 +120,7 @@ def modificar_mision():
             members_names=[]
             for character in Character.character_list:
                 members_names.append(character.name)
-            nuevos_integrantes= seleccionar_opcion(members_names)
+            nuevos_integrantes= seleccionar_opcion(members_names, max_seleccion=7)
             mision['integrantes']=nuevos_integrantes
             print(f'Nuevos integrantes de la mision: {mision['integrantes']}')
         elif opcion == "6":
