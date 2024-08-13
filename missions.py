@@ -36,11 +36,11 @@ def construir_mision():
     mision={} 
     
     mision["nombre"]= input("Nombre de la misión: ")
-
+    #Nombre del planeta
     print("Seleccione el planeta destino:")
     planetas=[planet.name for planet in Planet.planet_list]
     mision["planeta_destino"]=seleccionar_opcion(planetas, max_seleccion=1)[0]
-
+    #Nave 
     print("Seleccione la nave a utilizar:")
     naves=[starship.name for starship in Starship.starship_list]
     mision["nave"]=seleccionar_opcion(naves, max_seleccion=1)[0]
