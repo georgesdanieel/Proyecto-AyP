@@ -101,25 +101,28 @@ def modificar_mision():
             print(f'El planeta destino de la mision ha sido actualizado: {mision['planeta_destino']}')
         elif opcion=='3':
             print('Seleccione la nueva nave a utilizar: ')
+            starship_names=[]
             for starship in Starship.starship_list:
-                naves=starship.name
-                nueva_nave = seleccionar_opcion(naves, max_seleccion=1)[0]
-                mision['nave']=nueva_nave
-                print(f'La nave de la mision ha sido actualizada: {mision['nave']}')
+                starship_names.append(starship.name)
+            nueva_nave = seleccionar_opcion(starship_names, max_seleccion=1)[0]
+            mision['nave']=nueva_nave
+            print(f'La nave de la mision ha sido actualizada: {mision['nave']}')
         elif opcion=='4':
             print('Seleccione las nuevas armas: ')
+            weapons_names=[]
             for weapons in Weapon.weapon_list: #escoge desde 0 las armas
-                armas=weapons.name
-                nuevas_armas = seleccionar_opcion(armas)
-                mision['armas']=nuevas_armas
-                print(f'Armas actualizadas: {mision['armas']}')
+                weapons_names.append(weapons.name)
+            nuevas_armas = seleccionar_opcion(weapons)
+            mision['armas']=nuevas_armas
+            print(f'Armas actualizadas: {mision['armas']}')
         elif opcion=='5':
             print('Seleccione los nuevos integrantes: ')
+            members_names=[]
             for character in Character.character_list:
-                integrantes=character.name
-                nuevos_integrantes= seleccionar_opcion(integrantes)
-                mision['integrantes']=nuevos_integrantes
-                print(f'Nuevos integrantes de la mision: {mision['integrantes']}')
+                members_names.append(character.name)
+            nuevos_integrantes= seleccionar_opcion(members_names)
+            mision['integrantes']=nuevos_integrantes
+            print(f'Nuevos integrantes de la mision: {mision['integrantes']}')
         elif opcion == "6":
             break
         else:
