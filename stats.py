@@ -10,7 +10,7 @@ parametros=['MGLT','hyperdrive_rating','cost_in_credits','max_atmosphering_speed
 clasificacion= {}
 
 for parametro in parametros:
-    clase=df.groupby('starship_class')[parametro].agg(['count','mean', 'max', 'min'])
+    clase=df.groupby('starship_class')[parametro].agg(['count','mean', 'max', 'min']) #groupby me permite agregar por clase
     moda=df.groupby('starship_class')[parametro].agg(lambda x: x.value_counts().index[0] if len(x.value_counts()) > 0 else np.nan)
     clase['mode']=moda
     clasificacion[parametro]=clase
@@ -23,7 +23,7 @@ def stats_generales():
     '3':'cost_in_credits',
     '4':'max_atmosphering_speed'
 
-    }
+    } 
 
     while True:
         print('\n Seleccione una opcion para ver sus estadisticas. Coloca cualquier letra para salir')
