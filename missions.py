@@ -145,7 +145,7 @@ def ver_mision():
     mision_escogida=int(seleccion) - 1
     mision=missions[mision_escogida]
     print('\nDetalles de la misión')
-    print(f"'{mision['nombre']}':")
+    print(f"'{mision['nombre']}'")
     print(f"Planeta destino: {mision['planeta_destino']}")
     print(f"Nave a utilizar: {mision['nave']}")
     print(f"Armas: {', '.join(mision['armas'])}")
@@ -170,12 +170,11 @@ def cargar_mision():
         print("No se encontró el archivo misiones.txt")
         return
     
-    global missions
     missions = []
 
     with open("misiones.txt", "r") as file:
         for linea in file:
-            nombre, planeta_destino, nave, armas, integrantes = linea.strip().split('/')
+            nombre, planeta_destino, nave, armas, integrantes = linea.strip().split('|')
             mision = {
                 "nombre": nombre,
                 "planeta_destino": planeta_destino,
