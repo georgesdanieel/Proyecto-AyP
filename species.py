@@ -17,11 +17,4 @@ class Species:
         self.created=created
         self.edited=edited
 
-    def __repr__(self):
-        return(f"Species(name={self.name}, classification={self.classification}, designation={self.designation}, "
-               f"average_height={self.average_height}, average_lifespan={self.average_lifespan}, hair_colors={self.hair_colors}, " 
-               f"skin_colors={self.skin_colors}, eye_colors={self.eye_colors}, homeworld={self.homeworld}, "
-               f"language={self.language}, people={self.people}, url={self.url}, "
-               f"created={self.created}, edited={self.edited})")
-    
 
