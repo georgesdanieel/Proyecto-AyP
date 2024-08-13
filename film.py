@@ -16,7 +16,5 @@ class Film:
         self.created = created
         self.edited = edited
 
-    def __repr__(self):
-        return f"Film(title={self.title}, episode_id={self.episode_id}, opening_crawl={self.opening_crawl}, director={self.director}, producer={self.producer}, release_date={self.release_date}, species={self.species}, starships={self.starships}, vehicles={self.vehicles}, characters={self.characters}, planets={self.planets}, url={self.url}, created={self.created}, edited={self.edited})"
     
    
