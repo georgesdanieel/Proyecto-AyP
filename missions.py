@@ -189,7 +189,7 @@ def cargar_mision():
             missions.append(mision)
 
     print("Misiones cargadas exitosamente.")
-
+    return missions
 
             
 
