@@ -13,7 +13,7 @@ def listar_opciones(opciones):
 
 def seleccionar_opcion(opciones, max_seleccion=1, permitir_repetidos=True):
     seleccionados=[]
-    while len(seleccionados)>max_seleccion:
+    while len(seleccionados)<max_seleccion:
         listar_opciones(opciones)
         seleccion=input(f"Seleccione una opción (1-{len(opciones)}), o presione Enter para terminar: ")
         if seleccion=="":
