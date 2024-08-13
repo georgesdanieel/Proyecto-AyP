@@ -2,20 +2,20 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+file=('/Users/valentinavizcarrondo/Downloads/Proyecto-AyP-main-2/starships.csv')
+df = pd.read_csv(file)
+
+parametros=['MGLT','hyperdrive_rating','cost_in_credits','max_atmosphering_speed']
+
+clasificacion= {}
+
+for parametro in parametros:
+    clase=df.groupby('starship_class')[parametro].agg(['count','mean', 'max', 'min'])
+    moda=df.groupby('starship_class')[parametro].agg(lambda x: x.value_counts().index[0] if len(x.value_counts()) > 0 else np.nan)
+    clase['mode']=moda
+    clasificacion[parametro]=clase
+    
 def stats_generales():
-    file=('/Users/valentinavizcarrondo/Downloads/Proyecto-AyP-main-2/starships.csv')
-    df = pd.read_csv(file)
-
-    parametros=['MGLT','hyperdrive_rating','cost_in_credits','max_atmosphering_speed']
-
-    clasificacion= {}
-
-    for parametro in parametros:
-        clase=df.groupby('starship_class')[parametro].agg(['count','mean', 'max', 'min'])
-        moda=df.groupby('starship_class')[parametro].agg(lambda x: x.value_counts().index[0] if len(x.value_counts()) > 0 else np.nan)
-        clase['mode']=moda
-        clasificacion[parametro]=clase
-
     opciones={
 
     '1':'MGLT',
