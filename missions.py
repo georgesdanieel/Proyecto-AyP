@@ -11,14 +11,14 @@ def listar_opciones(opciones):
     for i, opcion in enumerate(opciones, 1):
         print(f"{i}. {opcion}")
 
-def seleccionar_opcion(opciones, max_seleccion=1, permitir_repetidos=True):
+def seleccionar_opcion(opciones, max_seleccion=1, permitir_repetidos=True): 
     seleccionados=[]
-    while len(seleccionados)<max_seleccion:
+    while len(seleccionados)<max_seleccion:  
         listar_opciones(opciones)
         seleccion=input(f"Seleccione una opción (1-{len(opciones)}), o presione Enter para terminar: ")
         if seleccion=="":
             break
-        if seleccion.isdigit() and 1 <= int(seleccion) <= len(opciones):
+        if seleccion.isdigit() and 1 <= int(seleccion) <= len(opciones): 
             eleccion=opciones[int(seleccion) - 1]
             if not permitir_repetidos and eleccion in seleccionados:
                 print("Esa opción ya ha sido seleccionada. Por favor, elija otra opción.")
@@ -28,8 +28,8 @@ def seleccionar_opcion(opciones, max_seleccion=1, permitir_repetidos=True):
             print("Opción inválida. Por favor, elija una opción válida.")
     return seleccionados
 
-def construir_mision():
-    if len(missions)>=5:
+def construir_mision(): 
+    if len(missions)>=5: #lista de misiones no puede ser mayor a 5
         print("No se pueden definir más de 5 misiones")
         return
     
@@ -57,18 +57,18 @@ def construir_mision():
     print(f"Misión '{mision['nombre']}' construida exitosamente.")
 
 def modificar_mision():
-    if not missions:
+    if not missions: 
         print("No hay misiones definidas.")
         return
     else: 
         print('Misiones definidas: ')
-        lista_misiones_temp=[]
+        lista_misiones_temp=[] #lista de misiones nueva
         for mision in missions:
             lista_misiones_temp.append(mision['nombre'])
         listar_opciones(lista_misiones_temp)
 
     seleccion=input('Seleccione una mision para visualizar: ')
-    if not seleccion.isdigit() or 1 <= int(seleccion)-1 <= len(missions):
+    if not seleccion.isdigit() or 1 <= int(seleccion)-1 <= len(missions): #el numero colocado tiene que ser un int, entre 0 y el numero de elementos en la lista
         print("Opción inválida. Por favor, elija una opción válida.")
         return
 
@@ -89,7 +89,7 @@ def modificar_mision():
         if opcion=='1':
             print('Seleccione el nuevo nombre: ')
             nuevo_nombre=input('--> ')
-            mision['nombre']=nuevo_nombre
+            mision['nombre']=nuevo_nombre #me cambia el value de nombre
             print(f'El nombre de la mision ha sido actualizado: {mision['nombre']}')
         elif opcion=='2':
             print('Seleccione el nuevo planeta destino: ')
@@ -127,7 +127,7 @@ def modificar_mision():
     print('Mision modificada exitosamente')
 
 def ver_mision():
-    if not missions:
+    if not missions: 
         print("No hay misiones definidas.")
         return
     else: 
@@ -156,9 +156,9 @@ def guardar_mision():
         print("No hay misiones definidas para guardar.")
         return
 
-    with open("misiones.txt", "w") as file:
+    with open("misiones.txt", "w") as file: #me abre el file misiones.txt
         for mision in missions:
-            mision["armas"] = ','.join(mision["armas"])
+            mision["armas"] = ','.join(mision["armas"]) #me une todas las armas con ,
             mision["integrantes"] = ','.join(mision["integrantes"])
             linea = f"{mision['nombre']}|{mision['planeta_destino']}|{mision['nave']}|{mision['armas']}|{mision['integrantes']}"
             file.write(linea)
@@ -166,13 +166,13 @@ def guardar_mision():
     print("Misiones guardadas exitosamente.")
 
 def cargar_mision():
-    if not os.path.exists("misiones.txt"):
+    if not os.path.exists("misiones.txt"): #si existe el doc misiones.txt
         print("No se encontró el archivo misiones.txt")
         return
     
     missions = []
 
-    with open("misiones.txt", "r") as file:
+    with open("misiones.txt", "r") as file: #agrega todas esas funciones
         for linea in file:
             nombre, planeta_destino, nave, armas, integrantes = linea.strip().split('|')
             mision = {
