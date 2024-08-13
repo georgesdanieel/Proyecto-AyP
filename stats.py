@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-file=('/Users/valentinavizcarrondo/Downloads/Proyecto-AyP-main-2/starships.csv')
+file=('/Users/valentinavizcarrondo/Documents/GitHub/Proyecto-AyP/Proyecto-AyP/Proyecto-AyP/csv/starships.csv')
 df = pd.read_csv(file)
 
 parametros=['MGLT','hyperdrive_rating','cost_in_credits','max_atmosphering_speed']
