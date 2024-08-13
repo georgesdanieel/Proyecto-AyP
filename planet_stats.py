@@ -1,24 +1,18 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-file= '/Users/valentinavizcarrondo/Downloads/Proyecto-AyP-main/csv/planets.csv'
+file= '/Users/valentinavizcarrondo/Documents/GitHub/Proyecto-AyP/Proyecto-AyP/Proyecto-AyP/csv/characters.csv'
 df= pd.read_csv(file)
 
-planets=df['name']
-characters = []
+planets=df['homeworld'].value_counts().index
+characters =df['homeworld'].value_counts().values
 
+plt.barh(range(len(planets)),characters, color='red') #quiero q se me separe cada 1 unidad
+plt.yticks(range(len(planets)), planets)
 
-def planet_graphs():
-    for resident in df['residents']:
-        characters.append(len(resident.split(',')))
+plt.xlabel('Número de personajes')
+plt.ylabel('Planetas')
+plt.title('Número de personajes por planeta')
 
-    plt.barh(planets,characters, color='red') #quiero q se me separe cada 1 unidad
-
-    plt.xticks(range(0,5,1))
-    plt.xlabel('Número de personajes')
-    plt.ylabel('Planetas')
-
-    plt.title('Número de personajes por planeta')
-
-    plt.show()
+plt.show()
 
