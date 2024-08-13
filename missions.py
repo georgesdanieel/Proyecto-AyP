@@ -93,11 +93,12 @@ def modificar_mision():
             print(f'El nombre de la mision ha sido actualizado: {mision['nombre']}')
         elif opcion=='2':
             print('Seleccione el nuevo planeta destino: ')
+            planet_names=[]
             for planet in Planet.planet_list:
-                planetas=planet.name
-                nuevo_planeta = seleccionar_opcion(planetas, max_seleccion=1)[0]
-                mision['planeta_destino']=nuevo_planeta
-                print(f'El planeta destino de la mision ha sido actualizado: {mision['planeta_destino']}')
+                planet_names.append(planet.name)
+            nuevo_planeta = seleccionar_opcion(planet_names, max_seleccion=1)[0]
+            mision['planeta_destino']=nuevo_planeta
+            print(f'El planeta destino de la mision ha sido actualizado: {mision['planeta_destino']}')
         elif opcion=='3':
             print('Seleccione la nueva nave a utilizar: ')
             for starship in Starship.starship_list:
