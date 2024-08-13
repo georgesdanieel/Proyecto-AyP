@@ -11,17 +11,22 @@ def listar_opciones(opciones):
     for i, opcion in enumerate(opciones, 1):
         print(f"{i}. {opcion}")
 
-def seleccionar_opcion(opciones,permitir_repetidos=True):
-    for i, opcion in enumerate(opciones, start=1):
-        print(f"{i}. {opcion}")
-    seleccion = input("Seleccione una opción: ")
-    if seleccion.isdigit() and 1<= int(seleccion)-1 <= len(opciones):
-        eleccion = int(seleccion) - 1
-    if not permitir_repetidos:
-        print("Esa opción ya ha sido seleccionada. Por favor, elija otra opción.")
-    else:
-        print("Opción inválida. Por favor, elija una opción válida.")
-    return [opciones[eleccion]]
+def seleccionar_opcion(opciones, max_seleccion=1, permitir_repetidos=True):
+    seleccionados=[]
+    while len(seleccionados)<max_seleccion:
+        listar_opciones(opciones)
+        seleccion=input(f"Seleccione una opción (1-{len(opciones)}), o presione Enter para terminar: ")
+        if seleccion=="":
+            break
+        if seleccion.isdigit() and 1 <= int(seleccion) <= len(opciones):
+            eleccion=opciones[int(seleccion) - 1]
+            if not permitir_repetidos and eleccion in seleccionados:
+                print("Esa opción ya ha sido seleccionada. Por favor, elija otra opción.")
+            else:
+                seleccionados.append(eleccion)
+        else: 
+            print("Opción inválida. Por favor, elija una opción válida.")
+    return seleccionados
 
 def construir_mision():
     if len(missions)>=5:
