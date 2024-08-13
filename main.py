@@ -432,9 +432,9 @@ def statistics_submenu():
         sub_selec=input(">>> ")
         if sub_selec=="1":
             print("Mostrando gráfico de cantidad de personajes por planeta")
-            personaje_por_mundo()
+            personaje_por_mundo(Character.character_list)
         elif sub_selec=="2":
-            caracteristicas_naves()
+            caracteristicas_naves(Starship.starship_list)
         elif sub_selec=="3":
             print("Mostrando estadísticas sobre naves")
             stats_generales()
