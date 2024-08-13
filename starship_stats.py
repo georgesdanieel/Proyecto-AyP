@@ -1,60 +1,49 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-file='/Users/valentinavizcarrondo/Downloads/Proyecto-AyP-main/csv/starships.csv'
-df=pd.read_csv(file)
+def caracteristicas_naves(starship_list):
 
-longitud=df['length']
-cargo=df['cargo_capacity']
-hiperimpulsor=df['hyperdrive_rating']
-mglt=df['MGLT']
-clase=df.groupby('starship_class')
+    data = {
+        "Name": [],
+        "Length": [],
+        "Cargo Capacity": [],
+        "Hyperdrive Rating": [],
+        "MGLT": []
+    }
+    for starship in starship_list:
+        data["Name"].append(starship.name)
+        data["Length"].append(float(starship.length))
+        data["Cargo Capacity"].append(float(starship.cargo_capacity))
+        data["Hyperdrive Rating"].append(float(starship.hyperdrive_rating))
+        data["MGLT"].append(float(starship.MGLT))
 
-def spaceship_graphs():
-    menu={
-        '1':'Longitud',
-        '2':'Capacidad de carga',
-        '3':'Hiperimpulsor',
-        '4':'MGLT'
-}
-    while True:
-        print('\n Seleccione una opcion para ver sus estadisticas. Coloca cualquier letra para salir')
-        for key, value in menu.items():
-            print(f'{key}- {value}')
-        opcion_seleccionada=input('--->  ')
+    df = pd.DataFrame(data)
+    fig, axs = plt.subplots(2, 2, figsize=(14, 10))
 
-        if opcion_seleccionada=='1':
-            clase_longitud=df.groupby('starship_class')['length'].mean()
-            plt.barh(clase_longitud.index, clase_longitud.values, color='green')
-            plt.xticks(range(0,20000,1000))
-            plt.ylabel('Clase de nave')
-            plt.xlabel('Longitud')
-            plt.title('Comparacion de la longitud por nave')
+    #Length
+    axs[0, 0].bar(df["Name"], df["Length"], color='blue')
+    axs[0, 0].set_title('Longitud de las Naves')
+    axs[0, 0].set_xlabel('Nave')
+    axs[0, 0].set_ylabel('Longitud')
 
-        elif opcion_seleccionada=='2':
-            clase_cargo=df.groupby('starship_class')['cargo_capacity'].mean()
-            plt.barh(clase_cargo.index, clase_cargo.values, color='green')
-            plt.xticks(range(0,100000000,100000))
-            plt.ylabel('Clase de nave')
-            plt.xlabel('Capacidad de carga')
-            plt.title('Comparacion de la capacidad de carga por nave')
+    #Cargo
+    axs[0, 1].bar(df["Name"], df["Cargo Capacity"], color='red')
+    axs[0, 1].set_title('Capacidad de Carga de las Naves')
+    axs[0, 1].set_xlabel('Nave')
+    axs[0, 1].set_ylabel('Capacidad de Carga por nave')
 
-        elif opcion_seleccionada=='3':
-            clase_hiperimpulsor=df.groupby('starship_class')['hyperdrive_rating'].mean()
-            plt.barh(clase_hiperimpulsor.index, clase_hiperimpulsor.values, color='purple')
-            plt.xticks(range(0,10,1))
-            plt.ylabel('Clase de nave')
-            plt.xlabel('Hiperimpulsor')
-            plt.title('Comparacion del hiperimpulsor por nave')
-            
-        elif opcion_seleccionada=='4':
-            clase_mglt=df.groupby('starship_class')['MGLT'].mean()
-            plt.barh(clase_mglt.index, clase_mglt.values, color='orange')
-            plt.xticks(range(0,150,10))
-            plt.ylabel('Clase de nave')
-            plt.xlabel('MGLT')
-            plt.title('Comparacion de MGLT por nave')
-            
-        else:
-            print('Ingrese una opcion valida')
+    # Hyperdrive Rating
+    axs[1, 0].bar(df["Name"], df["Hyperdrive Rating"], color='green')
+    axs[1, 0].set_title('Clasificación de Hiperimpulsor de las Naves')
+    axs[1, 0].set_xlabel('Nave')
+    axs[1, 0].set_ylabel('Clasificación de Hiperimpulsor por nave')
+
+    # MGLT
+    axs[1, 1].bar(df["Name"], df["MGLT"], color='purple')
+    axs[1, 1].set_title('MGLT de las Naves')
+    axs[1, 1].set_xlabel('Nave')
+    axs[1, 1].set_ylabel('MGLT')
+
+    plt.tight_layout()
+    plt.show()
 
