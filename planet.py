@@ -16,10 +16,5 @@ class Planet:
         self.residents = residents
         self.films = films
 
-    def __repr__(self):
-        return (f"Planet(name={self.name}, diameter={self.diameter}, rotation_period={self.rotation_period}, "
-                f"orbital_period={self.orbital_period}, gravity={self.gravity}, population={self.population}, "
-                f"climate={self.climate}, terrain={self.terrain}, surface_water={self.surface_water}, "
-                f"url={self.url}, created={self.created}, edited={self.edited})")
 
     
