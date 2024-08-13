@@ -17,6 +17,7 @@ def caracteristicas_naves(starship_list):
         data["Cargo Capacity"].append(float(starship.cargo_capacity) if starship.cargo_capacity else 0)
         data["Hyperdrive Rating"].append(float(starship.hyperdrive_rating) if starship.hyperdrive_rating else 0)
         data["MGLT"].append(float(starship.MGLT) if starship.MGLT else 0)
+        
     df = pd.DataFrame(data)
     fig, axs = plt.subplots(2, 2, figsize=(14, 10))
 
