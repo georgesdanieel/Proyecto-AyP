@@ -485,7 +485,7 @@ def main():
         print("Selecciones que desea realizar:")
         print("1. Ver listado detallados")
         print("2. Ver estadísticas")
-        print("3. Ver misiones")
+        print("3. Crea tu mision")
         print("4. Salir")
 
         selec=input(">>> ")
