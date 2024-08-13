@@ -176,9 +176,9 @@ def cargar_mision():
     
     missions = []
 
-    with open("misiones.txt", "r") as file: #agrega todas esas funciones
+    with open("misiones.txt", "r") as file: 
         for linea in file:
-            nombre, planeta_destino, nave, armas, integrantes = linea.strip().split('|')
+            nombre, planeta_destino, nave, armas, integrantes, *_ = linea.strip().split('|')
             mision = {
                 "nombre": nombre,
                 "planeta_destino": planeta_destino,
@@ -189,8 +189,7 @@ def cargar_mision():
             missions.append(mision)
 
     print("Misiones cargadas exitosamente.")
-    return missions
-
+    print(missions)
             
 
 
