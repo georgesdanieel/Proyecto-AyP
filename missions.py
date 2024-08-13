@@ -181,7 +181,7 @@ def cargar_mision():
 
     with open("misiones.txt", "r") as file:
         for linea in file:
-            nombre, planeta_destino, nave, armas, integrantes = linea.strip().split(',')
+            nombre, planeta_destino, nave, armas, integrantes = linea.strip().split('/')
             mision = {
                 "nombre": nombre,
                 "planeta_destino": planeta_destino,
