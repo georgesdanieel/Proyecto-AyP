@@ -18,8 +18,8 @@ def caracteristicas_naves(starship_list):
         data["Hyperdrive Rating"].append(float(starship.hyperdrive_rating) if starship.hyperdrive_rating else 0)
         data["MGLT"].append(float(starship.MGLT) if starship.MGLT else 0)
         
-    df = pd.DataFrame(data)
-    fig, axs = plt.subplots(2, 2, figsize=(14, 10))
+    df = pd.DataFrame(data) #otra forma de recolectar la info para hacer un grafico
+    fig, axs = plt.subplots(2, 2, figsize=(14, 10)) 
 
     axs[0, 0].bar(df["Name"], df["Length"], color='blue')
     axs[0, 0].set_title('Longitud de las Naves')
