@@ -11,12 +11,17 @@ def listar_opciones(opciones):
     for i, opcion in enumerate(opciones, 1):
         print(f"{i}. {opcion}")
 
-def seleccionar_opcion(options, max_seleccion=1):
-    for i, option in enumerate(options, start=1):
-        print(f"{i}. {option}")
+def seleccionar_opcion(opciones,permitir_repetidos=True):
+    for i, opcion in enumerate(opciones, start=1):
+        print(f"{i}. {opcion}")
     seleccion = input("Seleccione una opción: ")
-    seleccion = int(seleccion) - 1
-    return [options[seleccion]]
+    if seleccion.isdigit() and 1<= int(seleccion)-1 <= len(opciones):
+        eleccion = int(seleccion) - 1
+    if not permitir_repetidos:
+        print("Esa opción ya ha sido seleccionada. Por favor, elija otra opción.")
+    else:
+        print("Opción inválida. Por favor, elija una opción válida.")
+    return [opciones[eleccion]]
 
 def construir_mision():
     if len(missions)>=5:
