@@ -174,6 +174,7 @@ def cargar_mision():
         print("No se encontró el archivo misiones.txt")
         return
     
+    global missions
     missions = []
 
     with open("misiones.txt", "r") as file: 
@@ -189,7 +190,6 @@ def cargar_mision():
             missions.append(mision)
 
     print("Misiones cargadas exitosamente.")
-    print(missions)
             
 
 
